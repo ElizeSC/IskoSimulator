@@ -15,7 +15,7 @@ This project is developed as a **Machine Problem for CMSC 13: Surveys of Program
 ## 🎮 Game Features  
 - **Two Tracks of Learning**  
   - **DM Grounds (Theoretical):** Conceptual questions on paradigms (Imperative, OOP, Functional, Logic).  
-  - **AS Grounds (Practical):** Code-based questions in C, Java, Python, and Prolog.  
+  - **AS Grounds (Practical):** Code-based questions in C, Java, Python, and JavaScript.  
 
 - **Difficulty Levels:** Easy → Moderate → Difficult (aligned with Bloom’s taxonomy).  
 - **Life System:** Start with 3 sunflower lives; game over when all are lost.  
