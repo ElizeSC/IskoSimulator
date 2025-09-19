@@ -1,10 +1,10 @@
 # 🎓 ISKO SIMULATOR
-**Your UPTacloban Adventure in the World of Programming Paradigms**
+**Your UP Tacloban Adventure in the World of Programming Paradigms**
 
 ---
 
 ## 📖 Overview  
-**ISKO SIMULATOR** is an educational adventure game that simulates the academic journey of a UP student (Isko/Iska). Players explore campus-themed “grounds” while answering quiz challenges based on **programming paradigms**.  
+**ISKO SIMULATOR** is an educational adventure game that simulates the academic journey of a UP student. Players explore campus-themed “grounds” while answering quiz challenges based on **programming paradigms**.  
 
 The game blends **theoretical** and **practical** challenges across different difficulty levels. To succeed, players must manage limited lives (🌻 sunflowers) and strategically use coffee-based power-ups (☕ Latte, Macchiato, Americano).  
 
