@@ -35,3 +35,7 @@ This project is developed as a **Machine Problem for CMSC 13: Surveys of Program
 - **Version Control:** GitHub  
 
 ---
+
+## 👾 Contributors:
+- **Armeliz Securata Capawing** - BSCS 2 
+- **Mark Asher Abesia** - BSCS 2
