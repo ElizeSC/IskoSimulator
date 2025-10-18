@@ -44,6 +44,6 @@ This project is developed as a **Machine Problem for CMSC 13: Surveys of Program
 
 ## 👾 Contributors  
 - 🎀 **Armeliz Securata Capawing** - BSCS 2  
-- 🎀 **Mark Asher Abesia** - BSCS 2  
+- 🎀 **Mark Asher Garlit Abesia** - BSCS 2  
 
 ────୨ৎ──── ⋆.˚✮📚✮˚.⋆ ────୨ৎ────  
