@@ -43,6 +43,8 @@ public class Main {
         this.selectedGround = ground;
     }
 
+
+    
     public String getSelectedGround(){
         return selectedGround;
     }
