@@ -6,47 +6,36 @@ import static src.UIHelpers.*;
 
 public class InitialScreenPanel extends JPanel {
 
-    private final ImageIcon splashScreen, heroIcon, playIcon, playHoverIcon, playPressedIcon,
-            leaderboardIcon, leaderboardHoverIcon, leaderboardPressedIcon;
-
     public InitialScreenPanel(Main mainApp) {
-        // --- Load images ---
-        splashScreen = new ImageIcon("C:/Users/Armeliz/Desktop/IskoSimulator/assets/backdrops/home-screen-bg.png");
-        heroIcon = new ImageIcon("C:/Users/Armeliz/Desktop/IskoSimulator/assets/images-and-hero-sceens/Hero Screen.png");
+        // Load images
+        ImageIcon splashScreen = new ImageIcon("assets/backdrops/home-screen-bg.png");
+        ImageIcon heroIcon = new ImageIcon("assets/images-and-hero-sceens/Hero Screen.png");
+        ImageIcon playIcon = new ImageIcon("assets/text-and-buttons/start-default.png");
+        ImageIcon playHoverIcon = new ImageIcon("assets/text-and-buttons/start-hover.png");
+        ImageIcon playPressedIcon = new ImageIcon("assets/text-and-buttons/start-pressed.png");
+        ImageIcon leaderboardIcon = new ImageIcon("assets/text-and-buttons/leaderboard.png");
+        ImageIcon leaderboardHoverIcon = new ImageIcon("assets/text-and-buttons/leaderboard-hover.png");
+        ImageIcon leaderboardPressedIcon = new ImageIcon("assets/text-and-buttons/leaderboard-pressed.png");
 
-        playIcon = new ImageIcon("C:/Users/Armeliz/Desktop/IskoSimulator/assets/text-and-buttons/start-default.png");
-        playHoverIcon = new ImageIcon("C:/Users/Armeliz/Desktop/IskoSimulator/assets/text-and-buttons/start-hover.png");
-        playPressedIcon = new ImageIcon("C:/Users/Armeliz/Desktop/IskoSimulator/assets/text-and-buttons/start-pressed.png");
-
-        leaderboardIcon = new ImageIcon("C:/Users/Armeliz/Desktop/IskoSimulator/assets/text-and-buttons/leaderboard.png");
-        leaderboardHoverIcon = new ImageIcon("C:/Users/Armeliz/Desktop/IskoSimulator/assets/text-and-buttons/leaderboard-hover.png");
-        leaderboardPressedIcon = new ImageIcon("C:/Users/Armeliz/Desktop/IskoSimulator/assets/text-and-buttons/leaderboard-pressed.png");
-
-        // --- Layout ---
-        setLayout(null);
-        setPreferredSize(new Dimension(splashScreen.getIconWidth(), splashScreen.getIconHeight()));
+        setLayout(new BorderLayout());
 
         // Background
         JLabel bg = new JLabel(splashScreen);
-        bg.setBounds(0, 0, splashScreen.getIconWidth(), splashScreen.getIconHeight());
-        add(bg);
+        bg.setLayout(null);
 
-        // Hero
+        // Hero - positioned at top
         JLabel hero = new JLabel(heroIcon);
         hero.setBounds(141, 1, heroIcon.getIconWidth(), heroIcon.getIconHeight());
-        add(hero);
+        bg.add(hero);
 
-        // Play button
-        JButton playBtn = createImageButton(playIcon, playHoverIcon, playPressedIcon, () -> {
-            mainApp.showScreen("Grounds"); // switch to Grounds screen
-        });
+        // Buttons
+        JButton playBtn = createImageButton(playIcon, playHoverIcon, playPressedIcon,
+                () -> mainApp.showScreen("Grounds"));
 
-        // Leaderboard button
-        JButton leaderboardBtn = createImageButton(leaderboardIcon, leaderboardHoverIcon, leaderboardPressedIcon, () -> {
-            System.out.println("Leaderboard clicked");
-        });
+        JButton leaderboardBtn = createImageButton(leaderboardIcon, leaderboardHoverIcon,
+                leaderboardPressedIcon, () -> System.out.println("Leaderboard clicked"));
 
-        // Button panel
+        // Button panel - centered horizontally, positioned lower
         JPanel buttonPanel = new JPanel();
         buttonPanel.setOpaque(false);
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
@@ -61,34 +50,8 @@ public class InitialScreenPanel extends JPanel {
         int panelX = (splashScreen.getIconWidth() - widest) / 2;
         int panelY = 450;
         buttonPanel.setBounds(panelX, panelY, widest, totalHeight);
+        bg.add(buttonPanel);
 
-        add(buttonPanel);
-        setComponentZOrder(bg, getComponentCount() - 1); // make sure bg is at back
-    }
-
-    /*// Helper to create styled image button
-    public JButton createImageButton(ImageIcon icon, ImageIcon hover, ImageIcon pressed, Runnable action) {
-        JButton button = new JButton(icon);
-        button.setRolloverIcon(resizeIcon(hover, icon.getIconWidth(), icon.getIconHeight()));
-        button.setPressedIcon(pressed);
-        button.setBorderPainted(false);
-        button.setContentAreaFilled(false);
-        button.setFocusPainted(false);
-        button.addActionListener(e -> action.run());
-        return button;
-    }
-
-    public JButton createImageButtonPlain(ImageIcon icon, Runnable action) {
-        JButton button = new JButton(icon);
-        button.setBorderPainted(false);
-        button.setContentAreaFilled(false);
-        button.setFocusPainted(false);
-        button.addActionListener(e -> action.run());
-        return button;
-    }*/
-
-    private ImageIcon resizeIcon(ImageIcon icon, int w, int h) {
-        Image img = icon.getImage().getScaledInstance(w, h, Image.SCALE_SMOOTH);
-        return new ImageIcon(img);
+        add(bg, BorderLayout.CENTER);
     }
 }

@@ -1,13 +1,12 @@
 package src;
 
-import java.awt.*;
 import javax.swing.*;
+import java.awt.*;
 
 public class Main {
     private JFrame frame;
     private JPanel mainPanel;
     private CardLayout cardLayout;
-
     private String selectedGround;
 
     public Main() {
@@ -20,32 +19,33 @@ public class Main {
         // Create panels
         InitialScreenPanel initialScreen = new InitialScreenPanel(this);
         GroundsScreenPanel groundsScreen = new GroundsScreenPanel(this);
-        StageSelectionPanel stageSelection = new StageSelectionPanel(this);
-        
+        ASStageSelectionPanel asStageSelection = new ASStageSelectionPanel(this);
+        DMStageSelectionPanel dmStageSelection = new DMStageSelectionPanel(this);
 
-        // Add them to CardLayout
+        // Add to CardLayout
         mainPanel.add(initialScreen, "Initial");
         mainPanel.add(groundsScreen, "Grounds");
-        mainPanel.add(stageSelection, "Stage");
+        mainPanel.add(asStageSelection, "ASStages");
+        mainPanel.add(dmStageSelection, "DMStages");
 
         frame.setContentPane(mainPanel);
-        frame.pack();
+        frame.setSize(1440, 1024);
+        frame.setResizable(false); // Prevent resizing
+
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+
     }
 
-    // Method to switch screens
     public void showScreen(String name) {
         cardLayout.show(mainPanel, name);
     }
 
-    public void setSelectedGround(String ground){
+    public void setSelectedGround(String ground) {
         this.selectedGround = ground;
     }
 
-
-    
-    public String getSelectedGround(){
+    public String getSelectedGround() {
         return selectedGround;
     }
 
