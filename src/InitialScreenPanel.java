@@ -6,9 +6,12 @@ import static src.UIHelpers.*;
 
 public class InitialScreenPanel extends JPanel {
 
+    private Image background;
+
     public InitialScreenPanel(Main mainApp) {
         // Load images
-        ImageIcon splashScreen = new ImageIcon("assets/backdrops/home-screen-bg.png");
+        background = new ImageIcon("assets/backdrops/home-screen-bg.png").getImage();
+
         ImageIcon heroIcon = new ImageIcon("assets/images-and-hero-sceens/Hero Screen.png");
         ImageIcon playIcon = new ImageIcon("assets/text-and-buttons/start-default.png");
         ImageIcon playHoverIcon = new ImageIcon("assets/text-and-buttons/start-hover.png");
@@ -16,42 +19,45 @@ public class InitialScreenPanel extends JPanel {
         ImageIcon leaderboardIcon = new ImageIcon("assets/text-and-buttons/leaderboard.png");
         ImageIcon leaderboardHoverIcon = new ImageIcon("assets/text-and-buttons/leaderboard-hover.png");
         ImageIcon leaderboardPressedIcon = new ImageIcon("assets/text-and-buttons/leaderboard-pressed.png");
+        ImageIcon htpIcon = new ImageIcon("assets/text-and-buttons/htp-default.png");
+        ImageIcon htpHoverIcon = new ImageIcon("assets/text-and-buttons/htp-hover.png");
+        ImageIcon htpPressedIcon = new ImageIcon("assets/text-and-buttons/htp-pressed.png");
 
         setLayout(new BorderLayout());
 
-        // Background
-        JLabel bg = new JLabel(splashScreen);
-        bg.setLayout(null);
-
-        // Hero - positioned at top
+        // Hero at top
         JLabel hero = new JLabel(heroIcon);
-        hero.setBounds(141, 1, heroIcon.getIconWidth(), heroIcon.getIconHeight());
-        bg.add(hero);
+        hero.setHorizontalAlignment(SwingConstants.CENTER);
+        add(hero, BorderLayout.NORTH);
 
         // Buttons
         JButton playBtn = createImageButton(playIcon, playHoverIcon, playPressedIcon,
                 () -> mainApp.showScreen("Grounds"));
-
         JButton leaderboardBtn = createImageButton(leaderboardIcon, leaderboardHoverIcon,
                 leaderboardPressedIcon, () -> System.out.println("Leaderboard clicked"));
+        JButton htpBtn = createImageButton(htpIcon, htpHoverIcon, htpPressedIcon,
+                () -> mainApp.showScreen("HowToPlay"));
 
-        // Button panel - centered horizontally, positioned lower
         JPanel buttonPanel = new JPanel();
         buttonPanel.setOpaque(false);
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
         playBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
         leaderboardBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        htpBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonPanel.add(Box.createVerticalGlue());
         buttonPanel.add(playBtn);
-        buttonPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        buttonPanel.add(Box.createVerticalStrut(20));
         buttonPanel.add(leaderboardBtn);
+        buttonPanel.add(Box.createVerticalStrut(20));
+        buttonPanel.add(htpBtn);
+        buttonPanel.add(Box.createVerticalGlue());
 
-        int widest = Math.max(playIcon.getIconWidth(), leaderboardIcon.getIconWidth());
-        int totalHeight = playIcon.getIconHeight() + leaderboardIcon.getIconHeight() + 20;
-        int panelX = (splashScreen.getIconWidth() - widest) / 2;
-        int panelY = 450;
-        buttonPanel.setBounds(panelX, panelY, widest, totalHeight);
-        bg.add(buttonPanel);
+        add(buttonPanel, BorderLayout.CENTER);
+    }
 
-        add(bg, BorderLayout.CENTER);
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
     }
 }

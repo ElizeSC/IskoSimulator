@@ -21,12 +21,15 @@ public class Main {
         GroundsScreenPanel groundsScreen = new GroundsScreenPanel(this);
         ASStageSelectionPanel asStageSelection = new ASStageSelectionPanel(this);
         DMStageSelectionPanel dmStageSelection = new DMStageSelectionPanel(this);
+        Instructions howToPlayScreen = new Instructions(this);
 
         // Add to CardLayout
         mainPanel.add(initialScreen, "Initial");
         mainPanel.add(groundsScreen, "Grounds");
         mainPanel.add(asStageSelection, "ASStages");
         mainPanel.add(dmStageSelection, "DMStages");
+        mainPanel.add(howToPlayScreen, "HowToPlay");
+
 
         frame.setContentPane(mainPanel);
         frame.setSize(1440, 1024);
