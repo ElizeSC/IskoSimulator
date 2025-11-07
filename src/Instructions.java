@@ -1,82 +1,135 @@
-/* todo:
-    fix this idfk what the fuck is going on na
+/*todo:
+    fix assets **holy fuck** im gonna go crazy
  */
-
 
 package src;
 
 import java.awt.*;
-import javax.swing.*;
 import java.awt.event.*;
-import static src.UIHelpers.*;
+import javax.swing.*;
 
 public class Instructions extends JPanel {
-    ImageIcon bg;
-    ImageIcon grass, blackboard;
-    ImageIcon cont;
-    ImageIcon text;
+
+    private int currentPage = 1;
+    private final int TOTAL_PAGES = 3;
+    private JLabel textLabel;
+    private Main mainApp;
+
+    private ImageIcon[] instructionTexts;
 
     public Instructions(Main mainApp) {
-        // --- Load images ---
-        bg = new ImageIcon("assets/backdrops/AS-1-1.png");
-        grass = new ImageIcon("assets/objects/grass.png");
-        blackboard = new ImageIcon("assets/objects/blackboard.png");
-        text = new ImageIcon("assets/text-and-buttons/instructions_1.png");
+        this.mainApp = mainApp;
+        setLayout(new BorderLayout());
 
-        // --- Main layout ---
-        setLayout(new GridBagLayout());
+        // Load all instruction text images
+        instructionTexts = new ImageIcon[TOTAL_PAGES];
+        instructionTexts[0] = new ImageIcon("assets/text-and-buttons/instructions_1.png");
+        instructionTexts[1] = new ImageIcon("assets/text-and-buttons/instructions_2.png");
+        instructionTexts[2] = new ImageIcon("assets/text-and-buttons/instructions_3.png");
 
-        JLabel bgLabel = new JLabel(bg);
-        bgLabel.setLayout(new GridBagLayout()); // allow centering of content
+        // Background
+        ImageIcon bgIcon = new ImageIcon("assets/backdrops/AS-1-1.png");
+        JLabel bg = new JLabel(bgIcon);
+        bg.setLayout(new BorderLayout());
 
-        // --- Center panel ---
-        JPanel centerPanel = new JPanel();
-        centerPanel.setOpaque(false);
-        centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
+        // Load images
+        ImageIcon blackboardIcon = new ImageIcon("assets/objects/blackboard.png");
+        ImageIcon grassIcon = new ImageIcon("assets/objects/grass.png");
 
-        // --- Scale blackboard to fit 1440x842 nicely ---
+        // Scale blackboard
         int boardWidth = 1000;
         int boardHeight = 500;
-        Image scaledBlackboard = blackboard.getImage().getScaledInstance(boardWidth, boardHeight, Image.SCALE_SMOOTH);
-        ImageIcon blackboardScaledIcon = new ImageIcon(scaledBlackboard);
+        Image scaledBlackboard = blackboardIcon.getImage()
+                .getScaledInstance(boardWidth, boardHeight, Image.SCALE_SMOOTH);
 
-        // --- Scale text to fit proportionally ---
-        int textWidth = 800;
-        int textHeight = 250;
-        Image scaledText = text.getImage().getScaledInstance(textWidth, textHeight, Image.SCALE_SMOOTH);
-        ImageIcon textScaledIcon = new ImageIcon(scaledText);
-
-        // --- Layered blackboard + text setup ---
+        // Create layered pane for blackboard + text
         JLayeredPane layeredBoard = new JLayeredPane();
         layeredBoard.setPreferredSize(new Dimension(boardWidth, boardHeight));
 
-        JLabel boardLabel = new JLabel(blackboardScaledIcon);
+        // Blackboard layer
+        JLabel boardLabel = new JLabel(new ImageIcon(scaledBlackboard));
         boardLabel.setBounds(0, 0, boardWidth, boardHeight);
+        layeredBoard.add(boardLabel, Integer.valueOf(0));
 
-        JLabel textLabel = new JLabel(textScaledIcon);
-        // Adjust position so text sits centered and slightly higher (like written on it)
-        textLabel.setBounds((boardWidth - textWidth) / 2, 100, textWidth, textHeight);
+        // Text layer (will be updated dynamically)
+        textLabel = new JLabel();
+        updateTextImage();
+        layeredBoard.add(textLabel, Integer.valueOf(1));
 
-        layeredBoard.add(boardLabel, Integer.valueOf(0)); // blackboard at back
-        layeredBoard.add(textLabel, Integer.valueOf(1));  // text on top
-
-        // --- Center vertically ---
-        centerPanel.add(Box.createVerticalGlue());
+        // Center the blackboard
+        JPanel centerPanel = new JPanel(new GridBagLayout());
+        centerPanel.setOpaque(false);
         centerPanel.add(layeredBoard);
-        centerPanel.add(Box.createVerticalGlue());
 
-        // --- Add to background and main panel ---
-        bgLabel.add(centerPanel, new GridBagConstraints());
-        add(bgLabel);
+        // Grass at bottom
+        JLabel grass = new JLabel(grassIcon);
+        grass.setHorizontalAlignment(SwingConstants.CENTER);
 
-        // --- Keyboard input setup ---
+        // Add to background
+        bg.add(centerPanel, BorderLayout.CENTER);
+        bg.add(grass, BorderLayout.SOUTH);
+        add(bg, BorderLayout.CENTER);
+
+        // Mouse listener for advancing pages (more reliable than keyboard)
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                nextPage();
+            }
+        });
+
+        // Also support keyboard input
         setFocusable(true);
-        requestFocusInWindow();
         addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                System.out.println(e.getKeyCode());
+                nextPage();
             }
         });
+
+        // Request focus when mouse enters
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                requestFocusInWindow();
+            }
+        });
+    }
+
+    private void updateTextImage() {
+        // Scale current text
+        int textWidth = 800;
+        int textHeight = 250;
+        Image scaledText = instructionTexts[currentPage - 1].getImage()
+                .getScaledInstance(textWidth, textHeight, Image.SCALE_SMOOTH);
+
+        textLabel.setIcon(new ImageIcon(scaledText));
+
+        // Center text on blackboard
+        int boardWidth = 1000;
+        int boardHeight = 500;
+        int textX = (boardWidth - textWidth) / 2;
+        int textY = (boardHeight - textHeight) / 2;
+        textLabel.setBounds(textX, textY, textWidth, textHeight);
+    }
+
+    private void nextPage() {
+        if (currentPage < TOTAL_PAGES) {
+            // Go to next instruction page
+            currentPage++;
+            updateTextImage();
+            repaint();
+        } else {
+            // Last page - proceed to gameplay
+            System.out.println("Going to gameplay");
+            // mainApp.showScreen("Gameplay");
+        }
+    }
+
+    // Call this when the panel becomes visible to reset to page 1
+    public void reset() {
+        currentPage = 1;
+        updateTextImage();
+        requestFocusInWindow();
     }
 }
