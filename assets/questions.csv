@@ -1,0 +1,376 @@
+grounds,difficulty,category,question,optionA,optionB,optionC,optionD,correctAnswer
+Dm,Easy,"Theoritical, Introduction to Programming Paradigm",Which category of programming language is interpreted directly in hardware?,High-Level Languages ,Assembly Languages ,Scripting Languages ,Machine Languages,D
+Dm,Easy,"Theoritical, Introduction to Programming Paradigm",High-level languages are defined as anything that is: ,Text-based,Machine-independent,Non-text based,Von Neumann,B
+Dm,Easy,"Theoritical, Introduction to Programming Paradigm","What kind of languages are designed for writing low-level tasks, like memory and process management?",Scripting languages ,Esoteric languages,System languages,Visual languages,C
+Dm,Easy,"Theoritical, Introduction to Programming Paradigm","Programming by specifying the result you want, not how to get it, is characteristic of which paradigm?",Procedural,Declarative,Imperative,Structured,B
+Dm,Easy,"Theoritical, Introduction to Programming Paradigm",What kind of programming involves an explicit sequence of commands that update state?,"Declarative",Functional,Imperative,Structured,C
+Dm,Average,"Theoritical, Introduction to Programming Paradigm",Perl is an example of a language that belongs to which two categories?,System and Esoteric,High-level and Scripting,Visual and Domain-specific,Machine and Interpreted,B
+Dm,Average,"Theoritical, Introduction to Programming Paradigm",What is the difference in control flow between Imperative programming and Declarative programming?,Imperative flow is explicit and Declarative flow is implicit.,Imperative uses function calls and Declarative uses state updates,Imperative uses structured control and Declarative uses gotos; ,Imperative focuses on results and Declarative focuses on steps,A
+Dm,Average,"Theoritical, Introduction to Programming Paradigm","After the development of Simula-67, which programming language was considered the first pure object-oriented language?",C++,Java,Smalltalk,CLOS,C
+Dm,Difficult,"Theoritical, Introduction to Programming Paradigm","Allan Kay said some languages are made by agglutination of features, and others show crystallization of style. Which language belongs to the crystallization of the style group?",COBOL,PL/1,Ada,LISP,D
+Dm,Difficult,"Theoritical, Introduction to Programming Paradigm",There are two kinds of languages: the ones people complain about and the ones nobody uses. Who said this?,Bjarnne Stoustroup,Bjarne Stroustroup,Bjarne Stroustrup,Bjarnne Stroustrup,C
+Dm,Easy,"Theoritical, Procedural Programming",The idea of procedural programming was born around what time period?,1988,1958,1972,2005,B
+Dm,Easy,"Theoritical, Procedural Programming",Which early procedural language was typically implemented with an interpreter because it was intended for novice programmers?,FORTRAN,BASIC,COBOL,ALGOL 60,B
+Dm,Easy,"Theoritical, Procedural Programming",The C language was developed in 1972 by Ken Thompson and Dennis Ritchie at what location?,MIT,Harvard University,Bell Laboratories,Microsoft,C
+Dm,Easy,"Theoritical, Procedural Programming",Procedural language instructions are expressed in what form to make the program portable?,Compiler-dependent,Operating system specific,Machine-independent,Binary code,C
+Dm,Easy,"Theoritical, Procedural Programming",Modularity is defined as the degree to which a system's components can be separated and what? ,Optimized ,Recombined,Inherited,Declared,B
+Dm,Average,"Theoritical, Procedural Programming",Which C basic variable type is defined as representing the absence of type?,int,char,float,void,D
+Dm,Average,"Theoritical, Procedural Programming",Variables with static storage duration are implicitly initialized to what value if no explicit value is given? ,1,An undefined value,NULL,Their maximum range value,C
+Dm,Average,"Theoritical, Procedural Programming","In C, variables defined outside of all functions are known as what type of variables?",Local variables,Global variables,Pointer variables,Formal parameters,B
+Dm,Difficult,"Theoritical, Procedural Programming",What keyword is used in C to declare a variable that is defined in one file so that it is visible and can be linked in multiple files?,static,void,extern,register,C
+Dm,Difficult,"Theoritical, Procedural Programming",Which operator is used to access a variable's memory address for use in pointer variables? ,Asterisk (*),Colon (:),Ampersand (&),Hash (#),C
+Dm,Easy,"Theoritical, Functional Programming",Which programming paradigm is functional programming classified as?,Imperative,Procedural,Object-Oriented,Declarative,D
+Dm,Easy,"Theoritical, Functional Programming",What is the historical root of functional programming?,Turing machines,Set theory,Lambda calculus,Boolean algebra,C
+Dm,Easy,"Theoritical, Functional Programming",A functional program avoids changing state and:,Recursive calls,Anonymous functions,Mutable data,Higher-order functions,C
+Dm,Easy,"Theoritical, Functional Programming",Which early language with a functional approach was developed in the late 1950s?,Haskell,APL,Lisp,OCaml,C
+Dm,Easy,"Theoritical, Functional Programming",A pure function executes without:,Returning a value,Arguments,Side effects,Composition,C
+Dm,Average,"Theoritical, Functional Programming",The treatment of functions as objects that can be passed as parameters or stored in a variable is known as:,Higher-order programming,First-class functions,Currying,Pattern matching,B
+Dm,Average,"Theoritical, Functional Programming",Functions that reference variables outside their immediate scope (non-local variables) are called: ,Anonymous functions,Higher-order functions,Closures,Mutually recursive functions,C
+Dm,Average,"Theoritical, Functional Programming",A function is called bijective if and only if it is:,Surjective,Injective,Both injective and surjective,Compositional,C
+Dm,Difficult,"Theoritical, Functional Programming",A function is called invertible if and only if it is:,Injective,Surjective,Bijective,Tail-recursive,C
+Dm,Difficult,"Theoritical, Functional Programming","Recursion requires that the arguments should always approach the base case for termination, a property known as ______.",Tail recursion,Mutual recursion,Accumulation,Well-founded recursion,D
+Dm,Easy,"Theoritical, Object-Oriented Programming","In the context of the object-oriented programming paradigm, what are procedures often known as?",Classes,Methods,Fields,Attributes,B
+Dm,Easy,"Theoritical, Object-Oriented Programming","When a constructor creates an object, what is the object called in relation to the class? ",A reference,An instance,A method,A type,B
+Dm,Easy,"Theoritical, Object-Oriented Programming","What is the concept of having several methods with the same name within a class in Java, provided they have different formal parameter lists? ",Late binding,Inheritance,Overriding,Overloading,D
+Dm,Easy,"Theoritical, Object-Oriented Programming",What is a class defined as?,An object instance,A private variable,A data field,A collection of components,D
+Dm,Easy,"Theoritical, Object-Oriented Programming",What is the formal name for a procedure associated with an object class?,Attribute,Instance,Method,Field,C
+Dm,Average,"Theoritical, Object-Oriented Programming",What kind of methods are designed to change the values of variables? ,Accessors,Setters,Getters,Statistics,B
+Dm,Average,"Theoritical, Object-Oriented Programming","What does a reference variable store, in contrast to primitive type variables, which store data directly?",Object itself,Data type,Memory address,Instance,C
+Dm,Average,"Theoritical, Object-Oriented Programming","In inheritance in Java, what keyword is used to derive a class from an existing class?",implements,derives,extends,super,C
+Dm,Difficult,"Theoritical, Object-Oriented Programming",Java allows treating an object of a subclass as an object of its superclass through a reference variable of a superclass type. What concept does this illustrate? ,Encapsulation,Overloading,Polymorphism,Inheritance,C
+Dm,Difficult,"Theoritical, Object-Oriented Programming",What modifier can a method have that prevents it from being overridden in any subclass? ,private,static,abstract,final,D
+Dm,Easy,"Theoritical, Imperative vs Declarative Programming (Declarative)",Which of the following programming languages is listed as a common example of a declarative language?,Java,C++,SQL,Assembly,C
+Dm,Easy,"Theoritical, Imperative vs Declarative Programming (Declarative)",The two main sub-paradigms of declarative programming are functional programming and: ,Procedural Programming,Constrain Programming,Object-oriented Programming,Logic Programming,D
+Dm,Easy,"Theoritical, Imperative vs Declarative Programming (Declarative)",Logic programming is based on the syntax of which formal logic structure? ,Second-order logic,First-order logic ,Propositional calculus,Set theory,B
+Dm,Easy,"Theoritical, Imperative vs Declarative Programming (Imperative)","According to the source, what were the first imperative programming languages?",FORTRAN,COBOL,Machine Languages,Assembly Languages,C
+Dm,Easy,"Theoritical, Imperative vs Declarative Programming (Imperative)",What term is used for the contents of the storage locations (variables) in the computer’s memory at any given point during program execution?,The procedure,The compiler,The state,The abstraction,C
+Dm,Average,"Theoritical, Imperative vs Declarative Programming (Declarative)",A key characteristic that languages applying the declarative style attempt to minimize or eliminate is the presence of:,Explicit steps,Side effects,Logical variables,Automated theorem proving,B
+Dm,Average,"Theoritical, Imperative vs Declarative Programming (Imperative)","When imperative programming is combined with subprograms (procedures or functions), what is the resulting programming style called?",Object-Oriented Programming,Functional Programming,Procedural Programming,Structured Programming,C
+Dm,Average,"Theoritical, Imperative vs Declarative Programming (Imperative)","Which early high-level language, implemented in 1956 by IBM, was designed specifically for scientific applications and featured algebraic notation? ",ALGOL 60,COBOL,PL/I,FORTRAN,D
+Dm,Difficult,"Theoritical, Imperative vs Declarative Programming (Declarative)","Which individual is credited with introducing the resolution principle and the notion of unification in 1965, laying the foundation for logic programming? ",Alan Amistoso,Alan Kay,Alan Robinson,Alan Turing,C
+Dm,Difficult,"Theoritical, Imperative vs Declarative Programming (Imperative)",Which  foundational programming language introduced the BNF (Backus-Naur Form) notation for defining syntax and semantics? ,FORTAN,ALGOL 60,COBOL,Pascal,B
+Dm,Easy,"Theoritical, Event-Driven Programming",Event-driven programming is a programming paradigm where the flow of the program is determined by what? ,Control variables,Events,Sequential loops,Subroutines,B
+Dm,Easy,"Theoritical, Event-Driven Programming",Event-driven programming is the dominant paradigm used in which type of application? ,Console application,Database management,Graphical user interfaces (GUI’s),Embedded firmware,C
+Dm,Easy,"Theoritical, Event-Driven Programming",Which of the following is listed as an example of a language that makes writing event-driven programs easier? ,C,Assembly,Java,MATLAB,C
+Dm,Easy,"Theoritical, Event-Driven Programming","What typically runs continuously in an event-driven application, listening for events and triggering a callback function? ",An event handler,A sensor output,A main loop,A thread closure,C
+Dm,Easy,"Theoritical, Event-Driven Programming","When an event handler executes, it usually produces what kind of response? ",An error exception,A network ping,A visual response,A background computation,C
+Dm,Average,"Theoritical, Event-Driven Programming","According to the source, objects in Java (controls) are categorized into classes that possess attributes, methods, and what third element? ",Subroutines,Callbacks,Events,Closure,C
+Dm,Average,"Theoritical, Event-Driven Programming","What is the effect an event handler often has on the system, aside from producing a visual response?",Change the system’s state,Terminate the application,Optimize memory usage,Perform complex looping,A
+Dm,Average,"Theoritical, Event-Driven Programming","In Java event handling, if a listener interface is a functional interface because it contains only one abstract method, what technique can be used to avoid creating a bulky anonymous inner class? ",Adapter classes,Lambda expressions,Procedural subroutines,Hardware interrupts,B
+Dm,Difficult,"Theoritical, Event-Driven Programming",How many distinct methods does the MouseListener interface declare? ,One,Three,Five,Zero,C
+Dm,Difficult,"Theoritical, Event-Driven Programming","When using the MouseAdapter to handle mouse events, what type of class structure is often used for implementation?",A standard inherited class,An anonymous inner class,A static utility class,A procedural subroutine,B
+Dm,Easy,"Theoritical, Component Mappings between Programming Paradigms",What two main components constitute a C class in this style of implementation? ,Header file and implementation file,Instance and class object,Constructor and destructor,Public and private members,B
+Dm,Easy,"Theoritical, Component Mappings between Programming Paradigms","An instance type is defined using which fundamental C language construct? 
+",class,interface,struct,typedef,C
+Dm,Easy,"Theoritical, Component Mappings between Programming Paradigms",Constructors must be implemented as what type of method?,Private method,Instance method,Class method,Abstract method,C
+Dm,Easy,"Theoritical, Component Mappings between Programming Paradigms","Abstract instance method pointers, used for defining intended interfaces, should be initialized to what value? ",0,Null,The class object addrss,An error function,B
+Dm,Easy,"Theoritical, Component Mappings between Programming Paradigms",Which C preprocessor directive is used to alias long namespace identifiers for manageability? ,#include,#if,#define,#pragma,C
+Dm,Average,"Theoritical, Component Mappings between Programming Paradigms",What is the preferred return type for a constructor? ,A void pointer,A pointer to the instance type,The instance type,An integer status code,C
+Dm,Average,"Theoritical, Component Mappings between Programming Paradigms",Which macro must be used to retrieve the starting address of the containing subclass instance when accessing subclass data from an overridden base method?,sizeof(),offsetof(),typeof(),container_of(),B
+Dm,Average,"Theoritical, Component Mappings between Programming Paradigms",Which standard header file must be included to utilize the required macro for calculating address offsets in polymorphism?,stdlib.h,stdio.h,stddef.h,string.h,C
+Dm,Difficult,"Theoritical, Component Mappings between Programming Paradigms","Whenever an overridden instance method is called, we are guaranteed that it was called by an instance of which class type? ",The subclass,The base class,The interface,The main program instance,B
+Dm,Difficult,"Theoritical, Component Mappings between Programming Paradigms",What is the strict rule for instance declaration and initialization?,Must be static,Initialized by constructors,By constructors or macros,Must use constructors when declared,D
+,,,,,,,,
+As,Easy,"Programming, C Language",What is the correct format specifier for printing an integer in C?,%d,%c,%f,%s,A
+As,Easy,"Programming, C Language","printf(""%d"", 5 + 3 * 2);",11,12,14,16,A
+As,Easy,"Programming, C Language",Which header file is required for printf(),<stdlib.h>,<stdio.h>,<conio.h>,<math.h>,B
+As,Easy,"Programming, C Language","What is the output of the following code?
+int a = 10;
+a += 5;
+printf(""%d"", a);",5,10,15,20,C
+As,Easy,"Programming, C Language","What will printf(""%d"", 7 % 3); output?",0,1,2,3,B
+As,Easy,"Programming, C Language",What keyword is used to define a constant in C?,const,static,define,constant,A
+As,Easy,"Programming, C Language","Which data type can store a single character?",char,int,float,string,A
+As,Easy,"Programming, C Language","What will printf(""%d"", 5 % 2); output?",0,1,2,3,B
+As,Easy,"Programming, C Language",What is the output of this code?,0,1,true,false,A
+As,Easy,"Programming, C Language",What is the result of 5/2 in C?,2,2.5,3,4,A
+As,Easy,"Programming, C Language",What function is used to read a string?,scanf(),gets(),puts(),read(),B
+As,Easy,"Programming, C Language",What is the result of 11/3 in C?,2,3,3.5,4,B
+As,Easy,"Programming, C Language","What will printf(""%d"", 9 % 3); output?",0,1,2,3,A
+As,Average ,"Programming, C Language","int a = 10, b = 20;
+if (a = b)
+    printf(""Yes"");
+else
+    printf(""No"");",Yes,No,20,10,A
+As,Average,"Programming, C Language","What does the following print?
+int i = 0;
+while (i < 3) {
+    printf(""%d "", i);
+    i++;",0 1 2,1 2 3,0 1 2 3 ,Infinite Loop,A
+As,Average ,"Programming, C Language","What is the output?
+for (int i = 0; i < 5; i += 2)
+    printf(""%d "", i);",0 2,0 2 4,0 4 ,0 1 2 3 4,B
+As,Average,"Programming, C Language",Which of the following correctly declares an array of 5 integers?,int arr[5];,arr[5]int;,int[5] arr;,int arr;[5],A
+As,Average ,"Programming, C Language","What is the output?
+
+int a = 5, b = 2;
+float c = a / b;
+printf(""%.1f"", c);",2,2.0,2.5,Error,B
+As,Average,"Programming, C Language","What does this print?
+char str[] = ""C Programming"";
+printf(""%c"", *(str + 2));",C,P,R,rogramming,B
+As,Average,"Programming, C Language",Which statement ends a loop immediately?,break,exit,stop,continue,A
+As,Difficult ,"Programming, C Language","What is the output?
+int a = 3;
+printf(""%d"", a++ * ++a);",12,9,Undefined,15,C
+As,Difficult,"Programming, C Language","What is the output?
+
+int a = 0;
+for (; a < 3; a++)
+    if (a == 1)
+        continue;
+    else
+        printf(""%d"", a);",0,0 1 2,0 1 ,0 2,D
+As,Difficult,"Programming, C Language","What is the output? 
+
+int arr[] = {1, 2, 3, 4};
+printf(""%d"", *(arr + 2));",1,2,3,4,C
+As,Difficult,"Programming, C Language","What is the output?
+
+int x = 2;
+switch (x) {
+    case 1: printf(""One""); break;
+    case 2: printf(""Two"");
+    case 3: printf(""Three""); break;
+    default: printf(""Default"");
+}",Two,TwoThree,Three,Default,B
+As,Difficult,"Programming, C Language","What is the output of the following C program?
+int a = 5, b = 2;
+printf(""%d"", a++ + ++b * a);",24,21,18,Undefined,D
+As,Easy ,"Programming, Java",What is the correct syntax to print “Hello World” in Java?,"print(""Hello World"");","System.print(""Hello World"");","System.out.println(""Hello World"");","echo(""Hello World"");",C
+As,Easy,"Programming, Java",Which of the following is a valid variable declaration in Java?,int x = 10;,var int x = 10;,int = 10 x;,integer x = 10;,A
+As,Easy,"Programming, Java","What will this code output?
+
+int a = 5;
+System.out.println(a + 2 * 3);",21,10,11,16,C
+As,Easy,"Programming, Java",Which keyword is used to create an object in Java?,new,class,object,alloc,A
+As,Easy,"Programming, Java",Which of the following is a valid comment in Java?,// This is a comment,/* This is a comment */,Both A and B,# This is a comment,A
+As,Easy,"Programming, Java","What is the output?
+
+
+int x = 8;
+x /= 2;
+System.out.println(x);",2,8,4,6,C
+As,Easy,"Programming, Java",Which data type can store true or false values?,int,boolean,char,float,B
+As,Easy,"Programming, Java",Which method is always called when an object is created?,init(),setup(),start(),constructor,D
+As,Easy,"Programming, Java","What will this code output?
+
+int i = 1;
+while (i < 4) {
+    System.out.print(i + "" "");
+    i++;
+}",1 2 3,1 2 3 4,Infinite loop,0 1 2 ,A
+As,Easy,"Programming, Java",Which keyword is used to exit from a loop immediately?,continue,break,exit,stop,B
+As,Easy,"Programming, Java","What will this code output?
+
+int a = 3;
+System.out.println(++a);",2,4,3,Error,B
+As,Easy,"Programming, Java",Which keyword is used to inherit a class in Java?,implements,derives,extends,super,C
+As,Easy,"Programming, Java","What will be the result of this code?
+
+int x = 10;
+if (x == 10)
+    System.out.println(""Match"");
+else
+    System.out.println(""No Match"");",No Match,Error,10,Match,D
+As,Average,"Programming, Java","What is the output?
+
+int a = 10, b = 20;
+if (a = b) 
+    System.out.println(""Equal"");
+else
+    System.out.println(""Not Equal"");",Equal,Not Equal,Error,Compilation error,D
+As,Average,"Programming, Java","What is the output?
+
+public class Main {
+    public static void main(String[] args) {
+        int x = 5;
+        System.out.println(x++ + ++x);
+    }
+}",10,12,11,Undefined,C
+As,Average,"Programming, Java","What is wrong with this code?
+
+public class Main {
+    public static void main(String[] args) {
+        int arr = {1, 2, 3};
+        System.out.println(arr[0]);
+    }",Nothing wrong,Array declaration syntax error,Index out of bounds,Missing semicolon,B
+As,Average,"Programming, Java","What will this code print?
+
+String s = ""Java"";
+System.out.println(s.charAt(2));",J,a ,v,A,C
+As,Average,"Programming, Java","What is the output?
+
+int[] nums = {2, 4, 6};
+System.out.println(nums.length);",2,3,4,6,B
+As,Average,"Programming, Java","What is the error here?
+
+class Test {
+    void display() {
+        System.out.println(""Hello"");
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Test.display();
+    }
+}",Missing semicolon,Non-static method called from static context,Invalid syntax,Access modifier error,B
+As,Average,"Programming, Java","What is the output?
+
+String str = ""Hello"";
+str = str + "" World"";
+System.out.println(str)",Hello,Hello World,World Hello,Error,B
+As,Difficult ,"Programming, Java","Identify the error:
+
+class Main {
+    public static void main() {
+        System.out.println(""Missing something?"");
+    }
+}",Missing String[] args in main method,Missing semicolon,Missing import,Syntax error,A
+As,Difficult,"Programming, Java","What is the output?
+class Test {
+    int x;
+    Test(int x) {
+        this.x = x;
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Test t1 = new Test(5);
+        Test t2 = new Test(5);
+        System.out.println(t1 == t2);
+    }
+}",True,False,Error,5,B
+As,Difficult,"Programming, Java","What will this output?
+
+class A {
+    A() { System.out.print(""A ""); }
+}
+class B extends A {
+    B() { System.out.print(""B ""); }
+}
+public class Main {
+    public static void main(String[] args) {
+        new B();
+    }
+}",B A,A B ,A ,B,B
+As,Difficult,"Programming, Java","What will this program output? class X {
+    X() { System.out.print(""X ""); }
+}
+
+class Y extends X {
+    Y() { System.out.print(""Y ""); }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        new Y();
+    }
+}",Y X,X Y,X,Y,B
+As,Difficult,"Programming, Java","What is the output?
+
+public class Main {
+    public static void main(String[] args) {
+        int x = 5;
+        System.out.println(x++ + ++x);
+    }
+}",10,12,11,Undefined,C
+As,Easy ,"Programming, Python","What is the output of the following code?
+
+print(5 + 3 * 2)",10,16,11,8,C
+As,Easy ,"Programming, Python",Which keyword is used to define a function in Python?,func,def,function,define,B
+As,Easy ,"Programming, Python","What is the output?
+
+x = 10
+x /= 2
+print(x)",5,5.0,10,Error,B
+As,Easy ,"Programming, Python",Which data type is immutable in Python?,tuple,list,set,dictionary,A
+As,Easy ,"Programming, Python","What is the output of the following code?
+
+for i in range(3):
+    print(i, end="" "")",1 2 3,0 1 2,0 1 2 3 ,1 2,B
+As,Easy ,"Programming, Python",How do you take user input in Python 3?,input(),scan(),read(),get(),A
+As,Easy ,"Programming, Python","What will this code output?
+
+x = 5
+y = 3
+print(x // y)",1.6,2.0,1,2,C
+As,Easy ,"Programming, Python",Which symbol is used for comments in Python?,//,#,/* */,<!-- -->,B
+As,Average,"Programming, Python","What will this code output?
+
+
+def greet(name=""User""):
+    print(""Hello"", name)
+
+greet()",Hello,Hello User,Hello name,Error,B
+As,Average,"Programming, Python","What will this code output?
+
+def greet(name, msg=""Welcome""):
+    return f""{msg}, {name}!""
+
+print(greet(""Eli""))","Eli, Welcome!","Welcome, Eli!","Hello, Eli!",Syntax error,B
+As,Average,"Programming, Python","What will this print?
+
+nums = [1, 2, 3, 4]
+print([n * 2 for n in nums if n % 2 == 0])","[2, 4, 6, 8]","[1, 3]","[2, 4]","[4, 8]",D
+As,Average,"Programming, Python","What is the output?
+
+for i in range(2):
+    for j in range(2):
+        print(i + j, end="" "")",0 1 1 2,0 1 1 2,1 2 3,0 0 1 1,B
+As,Difficult ,"Programming, Python","What is the output?
+
+x = [1, 2, 3]
+y = x
+y.append(4)
+print(x)","[1, 2, 3]","[1, 2, 3, 4, 4]","[1, 2, 3, 4]",Error,C
+As,Difficult ,"Programming, Python","What will this print?
+
+def outer():
+    x = ""local""
+    def inner():
+        nonlocal x
+        x = ""modified""
+    inner()
+    return x
+
+print(outer())",local,modified,nonlocal,NameError,B
+As,Difficult ,"Programming, Python","What is the output?
+
+def f(a, b=[]):
+    b.append(a)
+    return b
+
+print(f(1))
+print(f(2))",[1] [2],"[1] [1, 2]","[1, 2] [1, 2]",Error,B
+As,Easy,"Programming, JavaScript",What is the correct way to print “Hello World” in JavaScript?,"print(""Hello World"");","echo(""Hello World"");","console.log(""Hello World"");","System.out.println(""Hello World"");",C
+As,Easy,"Programming, JavaScript",Which symbol is used for single-line comments in JavaScript?,#,//,<!-- -->,/* */,B
+As,Easy,"Programming, JavaScript","What will this code output?
+let x = 5;
+let y = 2;
+console.log(x + y * 3);",21,10,11,15,C
+As,Easy,"Programming, JavaScript","What is the result of this expression?
+
+console.log(typeof ""Hello"");",“Hello”,string,“typeof Hello”,object,B
+As,Easy,"Programming, JavaScript","In JavaScript, Which of the following is a valid variable declaration?","let name = ""Eli"";","var = ""Eli"";","variable name = ""Eli"";","name == ""Eli"";",A
+As,Average,"Programming, JavaScript","What will this code output?
+
+console.log(2 + ""2"");",4,"""22""",NaN,Error,B
+As,Average,"Programming, JavaScript","What will this print?
+
+console.log(0 == false);
+console.log(0 === false);",true true,true false,false true,false false,B
+As,Average,"Programming, JavaScript","Identify the issue:
+
+let x = 10;
+if (x = 5) {
+    console.log(""Five"");
+}",Syntax error,Assignment used instead of comparison,Missing semicolon,Wrong data type,B
+As,Difficult ,"Programming, JavaScript","What is the output?
+
+console.log([] == 0);
+console.log([] === 0);",true true,false true,true false,false false,C
+As,Difficult ,"Programming, JavaScript","What will this code print?
+
+console.log(typeof null);
+console.log(typeof NaN);","null, number","object, object","object, number","undefined, NaN",C

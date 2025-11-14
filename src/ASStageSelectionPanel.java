@@ -37,7 +37,7 @@ public class ASStageSelectionPanel extends JPanel {
 
         // Create stage panels using helper
         JPanel stage1 = createChoicePanel(as1Image, as1Label, as1Desc, true,
-                () -> System.out.println("AS-1 selected"));
+                () -> mainApp.startGameplay("AS", 1));
 
         JPanel stage2 = createChoicePanel(lockedImage, lockedLabel, lockedDesc, false, null);
         JPanel stage3 = createChoicePanel(lockedImage, lockedLabel, lockedDesc, false, null);
