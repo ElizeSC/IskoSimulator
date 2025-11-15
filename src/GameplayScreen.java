@@ -1,7 +1,4 @@
-/*
-    todo: fix interface
-
- */
+// ========== GameplayScreen.java ==========
 package src;
 
 import java.awt.*;
@@ -53,11 +50,34 @@ public class GameplayScreen extends JPanel {
         }
         topPanel.add(livesPanel, BorderLayout.WEST);
 
-        // Score (right)
-        scoreLabel = new JLabel("Score: 0   ");
-        scoreLabel.setFont(new Font("Poppins", Font.BOLD, 24));
+        // Score (center)
+        scoreLabel = new JLabel("Score: 0", SwingConstants.CENTER);
+        scoreLabel.setFont(new Font("Poppins", Font.BOLD, 28));
         scoreLabel.setForeground(Color.WHITE);
-        topPanel.add(scoreLabel, BorderLayout.EAST);
+        topPanel.add(scoreLabel, BorderLayout.CENTER);
+
+        // Power-ups (right)
+        JPanel powerupsPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 10));
+        powerupsPanel.setOpaque(false);
+
+        ImageIcon latteIcon = new ImageIcon("assets/objects/latte.png");
+        ImageIcon macchiatoIcon = new ImageIcon("assets/objects/macchiato.png");
+        ImageIcon americanoIcon = new ImageIcon("assets/objects/americano.png");
+
+        latteButton = createPowerupButton(latteIcon);
+        latteButton.addActionListener(e -> useLatte());
+
+        macchiatoButton = createPowerupButton(macchiatoIcon);
+        macchiatoButton.addActionListener(e -> useMacchiato());
+
+        americanoButton = createPowerupButton(americanoIcon);
+        americanoButton.addActionListener(e -> useAmericano());
+
+        powerupsPanel.add(latteButton);
+        powerupsPanel.add(macchiatoButton);
+        powerupsPanel.add(americanoButton);
+
+        topPanel.add(powerupsPanel, BorderLayout.EAST);
 
         // === CENTER: Question + Answers ===
         JPanel centerPanel = new JPanel();
@@ -89,53 +109,33 @@ public class GameplayScreen extends JPanel {
         }
         centerPanel.add(answersGrid);
 
-        // === BOTTOM: Power-ups + Grass ===
-        JPanel bottomPanel = new JPanel(new BorderLayout());
-        bottomPanel.setOpaque(false);
-
-        // Power-ups
-        JPanel powerupsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
-        powerupsPanel.setOpaque(false);
-
-        latteButton = new JButton("Latte\n50/50 (-20pts)");
-        latteButton.addActionListener(e -> useLatte());
-
-        macchiatoButton = new JButton("Macchiato\n2nd Chance (-30pts)");
-        macchiatoButton.addActionListener(e -> useMacchiato());
-
-        americanoButton = new JButton("Americano\nSkip (-50pts)");
-        americanoButton.addActionListener(e -> useAmericano());
-
-        powerupsPanel.add(latteButton);
-        powerupsPanel.add(macchiatoButton);
-        powerupsPanel.add(americanoButton);
-
-        // Grass
+        // === BOTTOM: Grass ===
         ImageIcon grassIcon = new ImageIcon("assets/objects/grass.png");
         JLabel grass = new JLabel(grassIcon);
 
-        bottomPanel.add(powerupsPanel, BorderLayout.NORTH);
-        bottomPanel.add(grass, BorderLayout.SOUTH);
-
-        // Add everything to background
         bg.add(topPanel, BorderLayout.NORTH);
         bg.add(centerPanel, BorderLayout.CENTER);
-        bg.add(bottomPanel, BorderLayout.SOUTH);
-        add(bg);
+        bg.add(grass, BorderLayout.SOUTH);
+
+        add(bg, BorderLayout.CENTER);
+    }
+
+    private JButton createPowerupButton(ImageIcon icon) {
+        JButton btn = new JButton(icon);
+        btn.setBorderPainted(false);
+        btn.setContentAreaFilled(false);
+        btn.setFocusPainted(false);
+        return btn;
     }
 
     public void startStage(String ground, int stage) {
-        // Initialize game state
         gameState = new GameState("Player");
         gameState.setCurrentStage(ground, stage);
-
-        // Load questions
         currentQuestions = questionBank.getQuestionsForStage(ground, stage);
         currentQuestionIndex = 0;
 
         System.out.println("Starting stage with " + currentQuestions.size() + " questions");
 
-        // Load first question
         refreshDisplay();
         loadQuestion();
     }
@@ -148,10 +148,8 @@ public class GameplayScreen extends JPanel {
 
         Question q = currentQuestions.get(currentQuestionIndex);
 
-        // Update question
         questionLabel.setText("<html><center>" + q.getQuestionText() + "</center></html>");
 
-        // Update answers
         String[] options = q.getOptions();
         String[] labels = {"A", "B", "C", "D"};
         for (int i = 0; i < 4; i++) {
@@ -166,13 +164,11 @@ public class GameplayScreen extends JPanel {
         boolean correct = q.isCorrect(selectedIndex);
 
         if (correct) {
-            // Correct!
             answerButtons[selectedIndex].setBackground(Color.GREEN);
             int points = gameState.getBasePointsForStage();
             gameState.addScore(points);
             refreshDisplay();
 
-            // Next question after 1 second
             Timer timer = new Timer(1000, e -> {
                 currentQuestionIndex++;
                 loadQuestion();
@@ -181,16 +177,13 @@ public class GameplayScreen extends JPanel {
             timer.start();
 
         } else {
-            // Wrong
             answerButtons[selectedIndex].setBackground(Color.RED);
 
             if (macchiatoActive) {
-                // Second chance
                 macchiatoActive = false;
                 answerButtons[selectedIndex].setEnabled(false);
                 JOptionPane.showMessageDialog(this, "Second chance! Try again.");
             } else {
-                // Lose life
                 gameState.loseLife();
                 refreshDisplay();
 
@@ -199,7 +192,6 @@ public class GameplayScreen extends JPanel {
                     return;
                 }
 
-                // Next question after 1 second
                 Timer timer = new Timer(1000, e -> {
                     currentQuestionIndex++;
                     loadQuestion();
@@ -216,7 +208,6 @@ public class GameplayScreen extends JPanel {
         Question q = currentQuestions.get(currentQuestionIndex);
         int correct = q.getCorrectAnswer();
 
-        // Disable 2 wrong answers
         int removed = 0;
         for (int i = 0; i < 4 && removed < 2; i++) {
             if (i != correct) {
@@ -226,38 +217,30 @@ public class GameplayScreen extends JPanel {
             }
         }
 
-        latteButton.setEnabled(false);
         refreshDisplay();
     }
 
     private void useMacchiato() {
         if (!gameState.useMacchiato()) return;
-
         macchiatoActive = true;
-        macchiatoButton.setEnabled(false);
         JOptionPane.showMessageDialog(this, "Next wrong answer won't cost a life!");
         refreshDisplay();
     }
 
     private void useAmericano() {
         if (!gameState.useAmericano()) return;
-
-        americanoButton.setEnabled(false);
         currentQuestionIndex++;
         loadQuestion();
     }
 
     private void refreshDisplay() {
-        // Update lives
         int lives = gameState.getSunflowers();
         for (int i = 0; i < 3; i++) {
             sunflowerLabels[i].setVisible(i < lives);
         }
 
-        // Update score
-        scoreLabel.setText("Score: " + gameState.getCurrentStageScore() + "   ");
+        scoreLabel.setText("Score: " + gameState.getCurrentStageScore());
 
-        // Update power-ups
         latteButton.setEnabled(gameState.isLatteAvailable());
         macchiatoButton.setEnabled(gameState.isMacchiatoAvailable());
         americanoButton.setEnabled(gameState.isAmericanoAvailable());
