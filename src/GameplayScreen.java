@@ -2,9 +2,8 @@
 package src;
 
 import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
 import java.util.List;
+import javax.swing.*;
 
 public class GameplayScreen extends JPanel {
 
@@ -38,12 +37,16 @@ public class GameplayScreen extends JPanel {
         // === TOP: Lives and Score ===
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setOpaque(false);
+        topPanel.setBorder(BorderFactory.createEmptyBorder(15, 20, 15, 20));
 
-        // Lives (left)
+        // Lives (upper left)
         JPanel livesPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
         livesPanel.setOpaque(false);
+        livesPanel.setPreferredSize(new Dimension(500, 80));
         sunflowerLabels = new JLabel[3];
+        
         ImageIcon sunflowerIcon = new ImageIcon("assets/objects/sunflower.png");
+        
         for (int i = 0; i < 3; i++) {
             sunflowerLabels[i] = new JLabel(sunflowerIcon);
             livesPanel.add(sunflowerLabels[i]);
@@ -51,12 +54,25 @@ public class GameplayScreen extends JPanel {
         topPanel.add(livesPanel, BorderLayout.WEST);
 
         // Score (center)
+        RoundedPanel scorePanel = new RoundedPanel(20);
+        scorePanel.setBackground(new Color(0, 0, 0, 120));
+        scorePanel.setLayout(new BorderLayout());
+        scorePanel.setBorder(BorderFactory.createEmptyBorder(10, 30, 10, 30));
+        
         scoreLabel = new JLabel("Score: 0", SwingConstants.CENTER);
         scoreLabel.setFont(new Font("Poppins", Font.BOLD, 28));
         scoreLabel.setForeground(Color.WHITE);
-        topPanel.add(scoreLabel, BorderLayout.CENTER);
+        
+        scorePanel.add(scoreLabel, BorderLayout.CENTER);
+        
+        // Wrapper to center the score panel
+        JPanel scorePanelWrapper = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        scorePanelWrapper.setOpaque(false);
+        scorePanelWrapper.add(scorePanel);
+        
+        topPanel.add(scorePanelWrapper, BorderLayout.CENTER);
 
-        // Power-ups (right)
+        // Power-ups (upper right)
         JPanel powerupsPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 10));
         powerupsPanel.setOpaque(false);
 
@@ -85,13 +101,22 @@ public class GameplayScreen extends JPanel {
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
         centerPanel.setBorder(BorderFactory.createEmptyBorder(100, 100, 50, 100));
 
-        // Question text
+       // Question panel with rounded transparent background
+        RoundedPanel questionPanel = new RoundedPanel(20);
+        questionPanel.setBackground(new Color(0, 0, 0, 120));
+        questionPanel.setLayout(new BorderLayout());
+        questionPanel.setBorder(BorderFactory.createEmptyBorder(20, 30, 20, 30));
+        questionPanel.setMaximumSize(new Dimension(900, 120));
+        
         questionLabel = new JLabel("<html><center>Loading question...</center></html>");
-        questionLabel.setFont(new Font("Poppins", Font.BOLD, 22));
+        questionLabel.setFont(new Font("Poppins", Font.BOLD, 18));
         questionLabel.setForeground(Color.WHITE);
-        questionLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        centerPanel.add(questionLabel);
-        centerPanel.add(Box.createVerticalStrut(40));
+        questionLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        questionPanel.add(questionLabel, BorderLayout.CENTER);
+        
+        centerPanel.add(questionPanel);
+        centerPanel.add(Box.createVerticalStrut(30));
 
         // Answer buttons (2x2 grid)
         JPanel answersGrid = new JPanel(new GridLayout(2, 2, 20, 20));
@@ -257,5 +282,29 @@ public class GameplayScreen extends JPanel {
         JOptionPane.showMessageDialog(this,
                 "Game Over!\nScore: " + gameState.getCurrentStageScore());
         mainApp.showScreen("Initial");
+    }
+
+      private class RoundedPanel extends JPanel {
+        private int cornerRadius;
+
+        public RoundedPanel(int radius) {
+            super();
+            this.cornerRadius = radius;
+            setOpaque(false);
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            Graphics2D g2 = (Graphics2D) g.create();
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            
+            g2.setColor(getBackground());
+            g2.fillRoundRect(0, 0, getWidth(), getHeight(), cornerRadius, cornerRadius);
+            
+            g2.dispose();
+            super.paintComponent(g);
+        }
+
+        
     }
 }
