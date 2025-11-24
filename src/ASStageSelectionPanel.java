@@ -28,7 +28,11 @@ public class ASStageSelectionPanel extends JPanel {
         container.add(Box.createVerticalStrut(40));
 
         // Load images
-        ImageIcon as1Image = new ImageIcon("assets/text-and-buttons/as1-image.png");
+        ImageIcon as1ImageOriginal = new ImageIcon("assets/text-and-buttons/as1-image.png");
+        // Resize to match the locked image size (adjusted the dimensions so that both images of the grounds are the same size)
+        Image as1ImageScaled = as1ImageOriginal.getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH);
+        ImageIcon as1Image = new ImageIcon(as1ImageScaled);
+
         ImageIcon as1Label = new ImageIcon("assets/text-and-buttons/as1-label.png");
         ImageIcon as1Desc = new ImageIcon("assets/text-and-buttons/Easy.png");
         ImageIcon lockedImage = new ImageIcon("assets/text-and-buttons/locked-img.png");

@@ -3,7 +3,8 @@ Dm,Easy,"Theoritical, Introduction to Programming Paradigm",Which category of pr
 Dm,Easy,"Theoritical, Introduction to Programming Paradigm",High-level languages are defined as anything that is: ,Text-based,Machine-independent,Non-text based,Von Neumann,B
 Dm,Easy,"Theoritical, Introduction to Programming Paradigm","What kind of languages are designed for writing low-level tasks, like memory and process management?",Scripting languages ,Esoteric languages,System languages,Visual languages,C
 Dm,Easy,"Theoritical, Introduction to Programming Paradigm","Programming by specifying the result you want, not how to get it, is characteristic of which paradigm?",Procedural,Declarative,Imperative,Structured,B
-Dm,Easy,"Theoritical, Introduction to Programming Paradigm",What kind of programming involves an explicit sequence of commands that update state?,"Declarative",Functional,Imperative,Structured,C
+Dm,Easy,"Theoritical, Introduction to Programming Paradigm",What kind of programming involves an explicit sequence of commands that update state?,"Declarative
+",Functional,Imperative,Structured,C
 Dm,Average,"Theoritical, Introduction to Programming Paradigm",Perl is an example of a language that belongs to which two categories?,System and Esoteric,High-level and Scripting,Visual and Domain-specific,Machine and Interpreted,B
 Dm,Average,"Theoritical, Introduction to Programming Paradigm",What is the difference in control flow between Imperative programming and Declarative programming?,Imperative flow is explicit and Declarative flow is implicit.,Imperative uses function calls and Declarative uses state updates,Imperative uses structured control and Declarative uses gotos; ,Imperative focuses on results and Declarative focuses on steps,A
 Dm,Average,"Theoritical, Introduction to Programming Paradigm","After the development of Simula-67, which programming language was considered the first pure object-oriented language?",C++,Java,Smalltalk,CLOS,C
@@ -80,9 +81,10 @@ a += 5;
 printf(""%d"", a);",5,10,15,20,C
 As,Easy,"Programming, C Language","What will printf(""%d"", 7 % 3); output?",0,1,2,3,B
 As,Easy,"Programming, C Language",What keyword is used to define a constant in C?,const,static,define,constant,A
-As,Easy,"Programming, C Language","Which data type can store a single character?",char,int,float,string,A
+As,Easy,"Programming, C Language","Which data type can store a single character?
+",char,int,float,string,A
 As,Easy,"Programming, C Language","What will printf(""%d"", 5 % 2); output?",0,1,2,3,B
-As,Easy,"Programming, C Language",What is the output of this code?,0,1,true,false,A
+As,Easy,"Programming, C Language","What is the output of this code? int x = 5 > 10; printf("%d", x)",0,1,true,false,A
 As,Easy,"Programming, C Language",What is the result of 5/2 in C?,2,2.5,3,4,A
 As,Easy,"Programming, C Language",What function is used to read a string?,scanf(),gets(),puts(),read(),B
 As,Easy,"Programming, C Language",What is the result of 11/3 in C?,2,3,3.5,4,B
@@ -91,12 +93,14 @@ As,Average ,"Programming, C Language","int a = 10, b = 20;
 if (a = b)
     printf(""Yes"");
 else
-    printf(""No"");",Yes,No,20,10,A
+    printf(""No"");
+",Yes,No,20,10,A
 As,Average,"Programming, C Language","What does the following print?
 int i = 0;
 while (i < 3) {
     printf(""%d "", i);
-    i++;",0 1 2,1 2 3,0 1 2 3 ,Infinite Loop,A
+    i++;
+",0 1 2,1 2 3,0 1 2 3 ,Infinite Loop,A
 As,Average ,"Programming, C Language","What is the output?
 for (int i = 0; i < 5; i += 2)
     printf(""%d "", i);",0 2,0 2 4,0 4 ,0 1 2 3 4,B
@@ -108,7 +112,8 @@ float c = a / b;
 printf(""%.1f"", c);",2,2.0,2.5,Error,B
 As,Average,"Programming, C Language","What does this print?
 char str[] = ""C Programming"";
-printf(""%c"", *(str + 2));",C,P,R,rogramming,B
+printf(""%c"", *(str + 2));
+",C,P,R,rogramming,B
 As,Average,"Programming, C Language",Which statement ends a loop immediately?,break,exit,stop,continue,A
 As,Difficult ,"Programming, C Language","What is the output?
 int a = 3;
@@ -136,7 +141,8 @@ switch (x) {
 }",Two,TwoThree,Three,Default,B
 As,Difficult,"Programming, C Language","What is the output of the following C program?
 int a = 5, b = 2;
-printf(""%d"", a++ + ++b * a);",24,21,18,Undefined,D
+printf(""%d"", a++ + ++b * a);
+",24,21,18,Undefined,D
 As,Easy ,"Programming, Java",What is the correct syntax to print “Hello World” in Java?,"print(""Hello World"");","System.print(""Hello World"");","System.out.println(""Hello World"");","echo(""Hello World"");",C
 As,Easy,"Programming, Java",Which of the following is a valid variable declaration in Java?,int x = 10;,var int x = 10;,int = 10 x;,integer x = 10;,A
 As,Easy,"Programming, Java","What will this code output?
@@ -172,7 +178,8 @@ int x = 10;
 if (x == 10)
     System.out.println(""Match"");
 else
-    System.out.println(""No Match"");",No Match,Error,10,Match,D
+    System.out.println(""No Match"");
+",No Match,Error,10,Match,D
 As,Average,"Programming, Java","What is the output?
 
 int a = 10, b = 20;
@@ -202,7 +209,8 @@ System.out.println(s.charAt(2));",J,a ,v,A,C
 As,Average,"Programming, Java","What is the output?
 
 int[] nums = {2, 4, 6};
-System.out.println(nums.length);",2,3,4,6,B
+System.out.println(nums.length);
+",2,3,4,6,B
 As,Average,"Programming, Java","What is the error here?
 
 class Test {
@@ -214,7 +222,8 @@ public class Main {
     public static void main(String[] args) {
         Test.display();
     }
-}",Missing semicolon,Non-static method called from static context,Invalid syntax,Access modifier error,B
+}
+",Missing semicolon,Non-static method called from static context,Invalid syntax,Access modifier error,B
 As,Average,"Programming, Java","What is the output?
 
 String str = ""Hello"";
@@ -226,7 +235,8 @@ class Main {
     public static void main() {
         System.out.println(""Missing something?"");
     }
-}",Missing String[] args in main method,Missing semicolon,Missing import,Syntax error,A
+}
+",Missing String[] args in main method,Missing semicolon,Missing import,Syntax error,A
 As,Difficult,"Programming, Java","What is the output?
 class Test {
     int x;
@@ -240,7 +250,8 @@ public class Main {
         Test t2 = new Test(5);
         System.out.println(t1 == t2);
     }
-}",True,False,Error,5,B
+}
+",True,False,Error,5,B
 As,Difficult,"Programming, Java","What will this output?
 
 class A {
@@ -253,7 +264,8 @@ public class Main {
     public static void main(String[] args) {
         new B();
     }
-}",B A,A B ,A ,B,B
+}
+",B A,A B ,A ,B,B
 As,Difficult,"Programming, Java","What will this program output? class X {
     X() { System.out.print(""X ""); }
 }
@@ -283,18 +295,21 @@ As,Easy ,"Programming, Python","What is the output?
 
 x = 10
 x /= 2
-print(x)",5,5.0,10,Error,B
+print(x)
+",5,5.0,10,Error,B
 As,Easy ,"Programming, Python",Which data type is immutable in Python?,tuple,list,set,dictionary,A
 As,Easy ,"Programming, Python","What is the output of the following code?
 
 for i in range(3):
-    print(i, end="" "")",1 2 3,0 1 2,0 1 2 3 ,1 2,B
+    print(i, end="" "")
+",1 2 3,0 1 2,0 1 2 3 ,1 2,B
 As,Easy ,"Programming, Python",How do you take user input in Python 3?,input(),scan(),read(),get(),A
 As,Easy ,"Programming, Python","What will this code output?
 
 x = 5
 y = 3
-print(x // y)",1.6,2.0,1,2,C
+print(x // y)
+",1.6,2.0,1,2,C
 As,Easy ,"Programming, Python",Which symbol is used for comments in Python?,//,#,/* */,<!-- -->,B
 As,Average,"Programming, Python","What will this code output?
 
@@ -302,28 +317,33 @@ As,Average,"Programming, Python","What will this code output?
 def greet(name=""User""):
     print(""Hello"", name)
 
-greet()",Hello,Hello User,Hello name,Error,B
+greet()
+",Hello,Hello User,Hello name,Error,B
 As,Average,"Programming, Python","What will this code output?
 
 def greet(name, msg=""Welcome""):
     return f""{msg}, {name}!""
 
-print(greet(""Eli""))","Eli, Welcome!","Welcome, Eli!","Hello, Eli!",Syntax error,B
+print(greet(""Eli""))
+","Eli, Welcome!","Welcome, Eli!","Hello, Eli!",Syntax error,B
 As,Average,"Programming, Python","What will this print?
 
 nums = [1, 2, 3, 4]
-print([n * 2 for n in nums if n % 2 == 0])","[2, 4, 6, 8]","[1, 3]","[2, 4]","[4, 8]",D
+print([n * 2 for n in nums if n % 2 == 0])
+","[2, 4, 6, 8]","[1, 3]","[2, 4]","[4, 8]",D
 As,Average,"Programming, Python","What is the output?
 
 for i in range(2):
     for j in range(2):
-        print(i + j, end="" "")",0 1 1 2,0 1 1 2,1 2 3,0 0 1 1,B
+        print(i + j, end="" "")
+",0 1 1 2,0 1 1 2,1 2 3,0 0 1 1,B
 As,Difficult ,"Programming, Python","What is the output?
 
 x = [1, 2, 3]
 y = x
 y.append(4)
-print(x)","[1, 2, 3]","[1, 2, 3, 4, 4]","[1, 2, 3, 4]",Error,C
+print(x)
+","[1, 2, 3]","[1, 2, 3, 4, 4]","[1, 2, 3, 4]",Error,C
 As,Difficult ,"Programming, Python","What will this print?
 
 def outer():
@@ -334,7 +354,8 @@ def outer():
     inner()
     return x
 
-print(outer())",local,modified,nonlocal,NameError,B
+print(outer())
+",local,modified,nonlocal,NameError,B
 As,Difficult ,"Programming, Python","What is the output?
 
 def f(a, b=[]):
@@ -342,20 +363,24 @@ def f(a, b=[]):
     return b
 
 print(f(1))
-print(f(2))",[1] [2],"[1] [1, 2]","[1, 2] [1, 2]",Error,B
+print(f(2))
+",[1] [2],"[1] [1, 2]","[1, 2] [1, 2]",Error,B
 As,Easy,"Programming, JavaScript",What is the correct way to print “Hello World” in JavaScript?,"print(""Hello World"");","echo(""Hello World"");","console.log(""Hello World"");","System.out.println(""Hello World"");",C
 As,Easy,"Programming, JavaScript",Which symbol is used for single-line comments in JavaScript?,#,//,<!-- -->,/* */,B
 As,Easy,"Programming, JavaScript","What will this code output?
 let x = 5;
 let y = 2;
-console.log(x + y * 3);",21,10,11,15,C
+console.log(x + y * 3);
+",21,10,11,15,C
 As,Easy,"Programming, JavaScript","What is the result of this expression?
 
-console.log(typeof ""Hello"");",“Hello”,string,“typeof Hello”,object,B
+console.log(typeof ""Hello"");
+",“Hello”,string,“typeof Hello”,object,B
 As,Easy,"Programming, JavaScript","In JavaScript, Which of the following is a valid variable declaration?","let name = ""Eli"";","var = ""Eli"";","variable name = ""Eli"";","name == ""Eli"";",A
 As,Average,"Programming, JavaScript","What will this code output?
 
-console.log(2 + ""2"");",4,"""22""",NaN,Error,B
+console.log(2 + ""2"");
+",4,"""22""",NaN,Error,B
 As,Average,"Programming, JavaScript","What will this print?
 
 console.log(0 == false);
@@ -365,12 +390,15 @@ As,Average,"Programming, JavaScript","Identify the issue:
 let x = 10;
 if (x = 5) {
     console.log(""Five"");
-}",Syntax error,Assignment used instead of comparison,Missing semicolon,Wrong data type,B
+}
+",Syntax error,Assignment used instead of comparison,Missing semicolon,Wrong data type,B
 As,Difficult ,"Programming, JavaScript","What is the output?
 
 console.log([] == 0);
-console.log([] === 0);",true true,false true,true false,false false,C
+console.log([] === 0);
+",true true,false true,true false,false false,C
 As,Difficult ,"Programming, JavaScript","What will this code print?
 
 console.log(typeof null);
-console.log(typeof NaN);","null, number","object, object","object, number","undefined, NaN",C
+console.log(typeof NaN);
+","null, number","object, object","object, number","undefined, NaN",C

@@ -1,7 +1,3 @@
-/*todo:
-    fix assets **holy fuck** im gonna go crazy
- */
-
 package src;
 
 import java.awt.*;
@@ -120,9 +116,10 @@ public class Instructions extends JPanel {
             updateTextImage();
             repaint();
         } else {
-            // Last page - proceed to gameplay
-            System.out.println("Going to gameplay");
-            // mainApp.showScreen("Gameplay");
+            // Last page - go to the Ground selection screen
+            System.out.println("Going to the Ground selection screen");
+            reset();
+            mainApp.showScreen("Grounds");
         }
     }
 
