@@ -18,12 +18,12 @@ public class NameInput extends JPanel {
 
         // Style Text Field
         nameField = new JTextField(15); 
-        nameField.setFont(new Font("Poppins", Font.BOLD, 32));
+        nameField.setFont(new Font("5by7", Font.BOLD, 70));
         nameField.setOpaque(false); 
         nameField.setForeground(Color.WHITE); 
         nameField.setCaretColor(Color.WHITE); 
         nameField.setHorizontalAlignment(JTextField.CENTER);
-        nameField.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.WHITE)); 
+        nameField.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, Color.WHITE)); 
 
         // Submit Action
         nameField.addActionListener(e -> handleNameSubmit());

@@ -7,7 +7,7 @@ public class SplashScreen extends JPanel {
     private Image logoImage;
 
     public SplashScreen() {
-        // Load image
+        
         logoImage = new ImageIcon("assets/backdrops/splash-screen.png").getImage();
         
         setLayout(new BorderLayout());
