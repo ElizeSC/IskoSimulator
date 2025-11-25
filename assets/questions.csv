@@ -74,7 +74,7 @@ Dm,Difficult,"Theoritical, Component Mappings between Programming Paradigms",Wha
 ,,,,,,,,
 As,Easy,"Programming, C Language",What is the correct format specifier for printing an integer in C?,%d,%c,%f,%s,A
 As,Easy,"Programming, C Language","printf(""%d"", 5 + 3 * 2);",11,12,14,16,A
-As,Easy,"Programming, C Language",Which header file is required for printf(),<stdlib.h>,<stdio.h>,<conio.h>,<math.h>,B
+As,Easy,"Programming, C Language","Which header file is required for printf()",stdlib.h,stdio.h,conio.h,math.h,B
 As,Easy,"Programming, C Language","What is the output of the following code?
 int a = 10;
 a += 5;

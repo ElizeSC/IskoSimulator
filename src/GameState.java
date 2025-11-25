@@ -54,6 +54,7 @@ public class GameState {
         if (latteAvailable) {
             latteAvailable = false;
             currentStageScore -= 20;
+            totalScore -= 20;
             return true;
         }
         return false;
@@ -63,6 +64,7 @@ public class GameState {
         if (macchiatoAvailable) {
             macchiatoAvailable = false;
             currentStageScore -= 30;
+            totalScore -= 30;
             return true;
         }
         return false;
@@ -72,6 +74,7 @@ public class GameState {
         if (americanoAvailable) {
             americanoAvailable = false;
             currentStageScore -= 50;
+            totalScore -= 50;
             return true;
         }
         return false;
@@ -84,6 +87,8 @@ public class GameState {
     // Scoring
     public void addScore(int points) {
         currentStageScore += points;
+        totalScore += points;  // Add to both stage and total
+        System.out.println("Score added: +" + points + " | Stage: " + currentStageScore + " | Total: " + totalScore);
     }
 
     public int calculateStageBonus() {
@@ -108,10 +113,15 @@ public class GameState {
     public void completeStage() {
         int bonus = calculateStageBonus();
         currentStageScore += bonus;
-        totalScore += currentStageScore;
+        totalScore += bonus;
+        
+        System.out.println("=== STAGE COMPLETED ===");
+        System.out.println("Stage bonus: " + bonus);
+        System.out.println("Stage score: " + currentStageScore);
+        System.out.println("New total score: " + totalScore);
 
-        // Mark stage as complete
-        if (currentGround.equals("AS")) {
+    // Mark stage as complete
+         if (currentGround.equals("AS")) {
             if (currentStage == 1) as1Complete = true;
             else if (currentStage == 2) as2Complete = true;
             else if (currentStage == 3) as3Complete = true;
@@ -133,9 +143,10 @@ public class GameState {
         this.currentGround = ground;
         this.currentStage = stage;
         resetStageState();
+        System.out.println("Starting " + ground + "-" + stage + " | Current Total Score: " + totalScore);
     }
 
-    public boolean isStageUnlocked(String ground, int stage) {
+     public boolean isStageUnlocked(String ground, int stage) {
         if (stage == 1) return true; // Stage 1 always unlocked
 
         if (ground.equals("AS")) {
@@ -147,6 +158,7 @@ public class GameState {
         }
         return false;
     }
+
 
     // Getters
     public String getPlayerName() { return playerName; }
