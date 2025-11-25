@@ -93,10 +93,10 @@ public class Main {
         showScreen("Splash");
         
         // Start intro music (plays during Splash + Name Entry)
-        musicManager.playMusic("assets/music/susunod-na-habang-buhay.wav");
+        musicManager.playMusic("assets/music/intro-music.wav");
 
         // Wait 3 Seconds (3000ms), then switch to Name Input
-        Timer timer = new Timer(3000, e -> {
+        Timer timer = new Timer(3500, e -> {
             showScreen("NameInput");
         });
         timer.setRepeats(false);
@@ -114,13 +114,13 @@ public class Main {
         
         // Switch to game music when entering the main game
         if (name.equals("Initial")) {
-            musicManager.playMusic("assets/music/multo.wav");
+            musicManager.playMusic("assets/music/game-music.wav");
         }
         
         cardLayout.show(mainPanel, name);
     }
 
-    // --- Data Methods ---
+    
     public void setPlayerName(String name) {
         this.playerName = name;
         System.out.println("Player Name Saved: " + this.playerName);
