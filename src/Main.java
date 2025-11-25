@@ -10,12 +10,14 @@ public class Main {
     
     // Game Data
     private String selectedGround;
-    private String playerName; // 1. Added variable to save name
+    private String playerName;
+    
+    // Music Manager
+    private final MusicManager musicManager;
 
     // Screens
-    private final SplashScreen splashScreen; // First Screen (Image)
-    private final NameInput nameInput;       // Second Screen (Input)
-    
+    private final SplashScreen splashScreen;
+    private final NameInput nameInput;
     private final InitialScreenPanel initialScreen;
     private final GroundsScreenPanel groundsScreen;
     private final ASStageSelectionPanel asStageSelection;
@@ -26,14 +28,24 @@ public class Main {
     public Main() {
         frame = new JFrame("Isko Simulator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        // Initialize Music Manager
+        musicManager = new MusicManager();
+        
+        // Add window listener to cleanup music when closing
+        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                musicManager.dispose();
+            }
+        });
 
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
 
         // --- Initialize Panels ---
         splashScreen = new SplashScreen();
-        nameInput = new NameInput(this); // 2. Initialize NameInput
-        
+        nameInput = new NameInput(this);
         initialScreen = new InitialScreenPanel(this);
         groundsScreen = new GroundsScreenPanel(this);
         asStageSelection = new ASStageSelectionPanel(this);
@@ -42,10 +54,9 @@ public class Main {
         gameplayScreen = new GameplayScreen(this);
 
         // --- Add to CardLayout ---
-        mainPanel.add(splashScreen, "Splash");     // 1st
-        mainPanel.add(nameInput, "NameInput");     // 2nd
-        mainPanel.add(initialScreen, "Initial");   // 3rd
-        
+        mainPanel.add(splashScreen, "Splash");
+        mainPanel.add(nameInput, "NameInput");
+        mainPanel.add(initialScreen, "Initial");
         mainPanel.add(groundsScreen, "Grounds");
         mainPanel.add(asStageSelection, "ASStages");
         mainPanel.add(dmStageSelection, "DMStages");
@@ -74,11 +85,15 @@ public class Main {
         this.mainPanel = mainPanel;
         this.nameInput = nameInput;
         this.splashScreen = splashScreen;
+        this.musicManager = new MusicManager();
     }
 
     private void runStartupSequence() {
         // Show the Splash Screen immediately
         showScreen("Splash");
+        
+        // Start intro music (plays during Splash + Name Entry)
+        musicManager.playMusic("assets/music/susunod-na-habang-buhay.wav");
 
         // Wait 3 Seconds (3000ms), then switch to Name Input
         Timer timer = new Timer(3000, e -> {
@@ -89,13 +104,19 @@ public class Main {
     }
 
     public void showScreen(String name) {
+        // Handle screen-specific logic
         if (name.equals("HowToPlay")) {
             howToPlayScreen.reset();
         }
-        // Focus the text field when NameInput appears
         if (name.equals("NameInput")) {
             nameInput.reset();
         }
+        
+        // Switch to game music when entering the main game
+        if (name.equals("Initial")) {
+            musicManager.playMusic("assets/music/multo.wav");
+        }
+        
         cardLayout.show(mainPanel, name);
     }
 

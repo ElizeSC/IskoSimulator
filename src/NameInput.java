@@ -11,7 +11,7 @@ public class NameInput extends JPanel {
     public NameInput(Main mainApp) {
         this.mainApp = mainApp;
         
-        // Load background
+        
         background = new ImageIcon("assets/backdrops/name-input.png").getImage();
         
         setLayout(new GridBagLayout());
