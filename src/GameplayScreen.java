@@ -287,10 +287,15 @@ public class GameplayScreen extends JPanel {
     }
 
     private void gameOver() {
-        JOptionPane.showMessageDialog(this,
-                "Game Over!\nTotal Score: " + gameState.getTotalScore());
-        mainApp.showScreen("Initial");
+    // Handle leaderboard
+    LeaderboardManager lbManager = mainApp.getLeaderboardManager();
+    if (lbManager.isHighScore(gameState.getTotalScore())) {
+        lbManager.addScore(gameState.getPlayerName(), gameState.getTotalScore());
     }
+    
+    // Show Game Over screen instead of popup
+    mainApp.showGameOver(gameState);
+}
 
       private class RoundedPanel extends JPanel {
         private int cornerRadius;
