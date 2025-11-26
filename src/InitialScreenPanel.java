@@ -34,7 +34,9 @@ public class InitialScreenPanel extends JPanel {
         JButton playBtn = createImageButton(playIcon, playHoverIcon, playPressedIcon,
                 () -> mainApp.showScreen("Grounds"));
         JButton leaderboardBtn = createImageButton(leaderboardIcon, leaderboardHoverIcon,
-                leaderboardPressedIcon, () -> System.out.println("Leaderboard clicked"));
+        leaderboardPressedIcon, () -> {
+            mainApp.showLeaderboard();
+        });
         JButton htpBtn = createImageButton(htpIcon, htpHoverIcon, htpPressedIcon,
                 () -> mainApp.showScreen("HowToPlay"));
 
