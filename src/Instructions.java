@@ -66,13 +66,6 @@ public class Instructions extends JPanel {
         bg.add(grass, BorderLayout.SOUTH);
         add(bg, BorderLayout.CENTER);
 
-        // Mouse listener for advancing pages (more reliable than keyboard)
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                nextPage();
-            }
-        });
 
         // Also support keyboard input
         setFocusable(true);

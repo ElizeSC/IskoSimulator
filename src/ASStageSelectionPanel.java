@@ -44,15 +44,23 @@ public class ASStageSelectionPanel extends JPanel {
         Image as2ImageScaled = as2ImageOriginal.getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH);
         ImageIcon as2Image = new ImageIcon(as2ImageScaled);
         ImageIcon as2Label = new ImageIcon("assets/text-and-buttons/as2-label.png");
-        ImageIcon as2Desc = new ImageIcon("assets/text-and-buttons/moderate.png");
+        ImageIcon as2Desc = new ImageIcon("assets/text-and-buttons/average.png");
+
+        ImageIcon as3ImageOriginal = new ImageIcon("assets/text-and-buttons/as3-image.png");
+        Image as3ImageScaled = as3ImageOriginal.getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH);
+        ImageIcon as3Image = new ImageIcon(as3ImageScaled);
+        ImageIcon as3Label = new ImageIcon("assets/text-and-buttons/as3-label.png");
+        ImageIcon as3Desc = new ImageIcon("assets/text-and-buttons/difficult.png");
 
         ImageIcon lockedImage = new ImageIcon("assets/text-and-buttons/locked-img.png");
         ImageIcon lockedLabel = new ImageIcon("assets/text-and-buttons/Locked.png");
         ImageIcon lockedDesc = new ImageIcon("assets/text-and-buttons/locked-description.png");
 
         boolean stage2Unlocked = gameState.isStageUnlocked("AS", 2);
+        boolean stage3Unlocked = gameState.isStageUnlocked("AS", 3);
 
         System.out.println("AS Stage 2 unlocked: " + stage2Unlocked);
+        System.out.println("AS Stage 3 unlocked: " + stage3Unlocked);
 
         // Create stage panels using helper
         JPanel stage1 = createChoicePanel(as1Image, as1Label, as1Desc, true,
@@ -64,11 +72,17 @@ public class ASStageSelectionPanel extends JPanel {
             stage2Unlocked ? as2Desc : lockedDesc,
             stage2Unlocked,
             stage2Unlocked ? () -> mainApp.startGameplay("AS", 2) : null
-    );
+        );
 
-        JPanel stage3 = createChoicePanel(lockedImage, lockedLabel, lockedDesc, false, null);
+        JPanel stage3 = createChoicePanel(
+            stage3Unlocked ? as3Image : lockedImage,
+            stage3Unlocked ? as3Label : lockedLabel,
+            stage3Unlocked ? as3Desc : lockedDesc,
+            stage3Unlocked,
+            stage3Unlocked ? () -> mainApp.startGameplay("AS", 3) : null
+        );
 
-        // Combine stages with Box layout for perfect centering
+        // Combine Stages
         JPanel stagesPanel = new JPanel();
         stagesPanel.setOpaque(false);
         stagesPanel.setLayout(new BoxLayout(stagesPanel, BoxLayout.X_AXIS));

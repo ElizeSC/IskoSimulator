@@ -276,6 +276,7 @@ public class GameplayScreen extends JPanel {
 
     private void useAmericano() {
         if (!gameState.useAmericano()) return;
+        refreshDisplay();
         currentQuestionIndex++;
         loadQuestion();
     }

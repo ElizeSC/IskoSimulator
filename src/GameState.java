@@ -120,7 +120,7 @@ public class GameState {
         System.out.println("Stage score: " + currentStageScore);
         System.out.println("New total score: " + totalScore);
 
-    // Mark stage as complete
+        // Mark stage as complete
          if (currentGround.equals("AS")) {
             if (currentStage == 1) as1Complete = true;
             else if (currentStage == 2) as2Complete = true;
