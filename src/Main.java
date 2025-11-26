@@ -27,11 +27,13 @@ public class Main {
     private final GameplayScreen gameplayScreen;
     private LeaderboardManager leaderboardManager;
     private LeaderboardPanel leaderboardPanel;
+    private final GameOverPanel gameOverScreen;
     
     // [Updated] Added StageCompletePanel variable
     private final StageCompletePanel stageCompleteScreen; 
 
     public Main() {
+        gameOverScreen = new GameOverPanel(this);
         // 1. Create Frame First
         frame = new JFrame("Isko Simulator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -77,6 +79,7 @@ public class Main {
         mainPanel.add(howToPlayScreen, "HowToPlay");
         mainPanel.add(gameplayScreen, "Gameplay");
         mainPanel.add(leaderboardPanel, "Leaderboard");
+        mainPanel.add(gameOverScreen, "GameOver");
         
         // [Updated] Add StageCompletePanel to the layout
         mainPanel.add(stageCompleteScreen, "StageComplete");
@@ -177,5 +180,10 @@ public class Main {
 
     public LeaderboardManager getLeaderboardManager() {
         return leaderboardManager;
+    }
+
+    public void showGameOver(GameState currentState) {
+    gameOverScreen.updateScore(currentState.getTotalScore());
+    cardLayout.show(mainPanel, "GameOver");
     }
 }
