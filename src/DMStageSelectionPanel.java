@@ -6,7 +6,13 @@ import static src.UIHelpers.*;
 
 public class DMStageSelectionPanel extends JPanel {
 
-    public DMStageSelectionPanel(Main mainApp) {
+    private Main mainApp;
+    private GameState gameState;
+
+    public DMStageSelectionPanel(Main mainApp, GameState gameState) {
+        this.mainApp = mainApp;
+        this.gameState = gameState;
+
         setLayout(new BorderLayout());
 
         // Background
@@ -27,25 +33,69 @@ public class DMStageSelectionPanel extends JPanel {
         container.add(title);
         container.add(Box.createVerticalStrut(40));
 
-         // Load and resize images
-        ImageIcon dmImageOriginal = new ImageIcon("assets/text-and-buttons/dm-image.png");
-         // Resize to match the locked image size (adjusted the dimensions so that both images of the grounds are the same size)
-        Image dmImageScaled = dmImageOriginal.getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH);
-        ImageIcon dmImage = new ImageIcon(dmImageScaled);
-        ImageIcon dmLabel = new ImageIcon("assets/text-and-buttons/dm-label.png");
-        ImageIcon dmDesc = new ImageIcon("assets/text-and-buttons/Easy.png");
+        // Load images for DM stages
+        ImageIcon dm1ImageOriginal = new ImageIcon("assets/text-and-buttons/dm1-image.png");
+        Image dm1ImageScaled = dm1ImageOriginal.getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH);
+        ImageIcon dm1Image = new ImageIcon(dm1ImageScaled);
+        ImageIcon dm1Label = new ImageIcon("assets/text-and-buttons/dm1-label.png");
+        ImageIcon dm1Desc = new ImageIcon("assets/text-and-buttons/Easy.png");
+
+        ImageIcon dm2ImageOriginal = new ImageIcon("assets/text-and-buttons/dm2-image.png");
+        Image dm2ImageScaled = dm2ImageOriginal.getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH);
+        ImageIcon dm2Image = new ImageIcon(dm2ImageScaled);
+        ImageIcon dm2Label = new ImageIcon("assets/text-and-buttons/dm2-label.png");
+        ImageIcon dm2Desc = new ImageIcon("assets/text-and-buttons/average.png");
+
+        ImageIcon dm3ImageOriginal = new ImageIcon("assets/text-and-buttons/dm3-image.png");
+        Image dm3ImageScaled = dm3ImageOriginal.getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH);
+        ImageIcon dm3Image = new ImageIcon(dm3ImageScaled);
+        ImageIcon dm3Label = new ImageIcon("assets/text-and-buttons/dm3-label.png");
+        ImageIcon dm3Desc = new ImageIcon("assets/text-and-buttons/difficult.png");
+
         ImageIcon lockedImage = new ImageIcon("assets/text-and-buttons/locked-img.png");
         ImageIcon lockedLabel = new ImageIcon("assets/text-and-buttons/Locked.png");
         ImageIcon lockedDesc = new ImageIcon("assets/text-and-buttons/locked-description.png");
 
-        // Create stage panels using helper
-        JPanel stage1 = createChoicePanel(dmImage, dmLabel, dmDesc, true,
-                () -> mainApp.startGameplay("DM", 1));
+        // Check unlock status from GameState
+        boolean stage1Unlocked = gameState.isStageUnlocked("DM", 1);
+        boolean stage2Unlocked = gameState.isStageUnlocked("DM", 2);
+        boolean stage3Unlocked = gameState.isStageUnlocked("DM", 3);
 
-        JPanel stage2 = createChoicePanel(lockedImage, lockedLabel, lockedDesc, false, null);
-        JPanel stage3 = createChoicePanel(lockedImage, lockedLabel, lockedDesc, false, null);
+        boolean stage1Clickable = gameState.isStageClickable("DM", 1);
+        boolean stage2Clickable = gameState.isStageClickable("DM", 2);
+        boolean stage3Clickable = gameState.isStageClickable("DM", 3);
 
-        // Combine stages with Box layout for perfect centering
+        System.out.println("=== DM STAGE SELECTION SCREEN ===");
+        System.out.println("DM Stage 1 unlocked: " + stage1Unlocked); 
+        System.out.println("DM Stage 2 unlocked: " + stage2Unlocked);
+        System.out.println("DM Stage 3 unlocked: " + stage3Unlocked);
+
+        // Create stage panels with proper unlock/clickable logic
+        JPanel stage1 = createChoicePanel(
+            stage1Unlocked ? dm1Image : lockedImage,  
+            stage1Unlocked ? dm1Label : lockedLabel,   
+            stage1Unlocked ? dm1Desc : lockedDesc,   
+            stage1Clickable,                        
+            stage1Clickable ? () -> mainApp.startGameplay("DM", 1) : null 
+        );
+
+        JPanel stage2 = createChoicePanel(
+            stage2Unlocked ? dm2Image : lockedImage,
+            stage2Unlocked ? dm2Label : lockedLabel,
+            stage2Unlocked ? dm2Desc : lockedDesc,
+            stage2Clickable,
+            stage2Clickable ? () -> mainApp.startGameplay("DM", 2) : null
+        );
+
+        JPanel stage3 = createChoicePanel(
+            stage3Unlocked ? dm3Image : lockedImage,
+            stage3Unlocked ? dm3Label : lockedLabel,
+            stage3Unlocked ? dm3Desc : lockedDesc,
+            stage3Clickable,
+            stage3Clickable ? () -> mainApp.startGameplay("DM", 3) : null
+        );
+
+        // Combine Stages
         JPanel stagesPanel = new JPanel();
         stagesPanel.setOpaque(false);
         stagesPanel.setLayout(new BoxLayout(stagesPanel, BoxLayout.X_AXIS));
