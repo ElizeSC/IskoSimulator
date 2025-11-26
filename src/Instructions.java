@@ -29,7 +29,7 @@ public class Instructions extends JPanel {
         bg.setLayout(new BorderLayout());
 
         // Load images
-        ImageIcon blackboardIcon = new ImageIcon("assets/objects/blackboard.png");
+        ImageIcon blackboardIcon = new ImageIcon("assets/objects/blackboard-2.png");
         ImageIcon grassIcon = new ImageIcon("assets/objects/grass.png");
 
         // Scale blackboard

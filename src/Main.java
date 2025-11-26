@@ -11,7 +11,7 @@ public class Main {
     // Game Data
     private String selectedGround;
 
-  3
+  
     private GameState gameState;
 
     private String playerName;
