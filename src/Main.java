@@ -22,6 +22,7 @@ public class Main {
     private final InitialScreenPanel initialScreen;
     private final GroundsScreenPanel groundsScreen;
     private ASStageSelectionPanel asStageSelection;
+    private DMStageSelectionPanel dmStageSelection;
     private final Instructions howToPlayScreen;
     private final GameplayScreen gameplayScreen;
     private LeaderboardManager leaderboardManager;
@@ -60,6 +61,7 @@ public class Main {
         howToPlayScreen = new Instructions(this);
         gameplayScreen = new GameplayScreen(this);
         asStageSelection = new ASStageSelectionPanel(this, gameState);
+        dmStageSelection = new DMStageSelectionPanel(this, gameState);
         leaderboardPanel = new LeaderboardPanel(this, leaderboardManager);
         
         // [Updated] Initialize StageCompletePanel
@@ -71,6 +73,7 @@ public class Main {
         mainPanel.add(initialScreen, "Initial");
         mainPanel.add(groundsScreen, "Grounds");
         mainPanel.add(asStageSelection, "ASStages");
+        mainPanel.add(dmStageSelection, "DMStages");
         mainPanel.add(howToPlayScreen, "HowToPlay");
         mainPanel.add(gameplayScreen, "Gameplay");
         mainPanel.add(leaderboardPanel, "Leaderboard");
@@ -113,8 +116,14 @@ public class Main {
 
     private void updateStageSelectionPanels() {
         mainPanel.remove(asStageSelection);
+        mainPanel.remove(dmStageSelection);
+    
         asStageSelection = new ASStageSelectionPanel(this, gameState);
+        dmStageSelection = new DMStageSelectionPanel(this, gameState);
+    
         mainPanel.add(asStageSelection, "ASStages");
+        mainPanel.add(dmStageSelection, "DMStages");
+    
         mainPanel.revalidate();
         mainPanel.repaint();
     }

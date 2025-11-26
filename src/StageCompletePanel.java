@@ -12,6 +12,9 @@ public class StageCompletePanel extends JPanel {
     private JLabel sunflowersLabel;
     private JLabel powerupsLabel;
 
+    private String currentGround;
+    private int currentStage;
+
     public StageCompletePanel(Main mainApp) {
         this.mainApp = mainApp;
         setLayout(new BorderLayout());
@@ -77,10 +80,17 @@ public class StageCompletePanel extends JPanel {
         JButton continueBtn = createStyledButton("Main Menu");
         continueBtn.addActionListener(e -> mainApp.showScreen("Initial"));
 
-        JButton nextStageBtn = createStyledButton("Stage Selection");
+        JButton nextStageBtn = createStyledButton("Continue");
         nextStageBtn.addActionListener(e -> {
-            // [Updated] Go to ASStages map for next level selection
-            mainApp.showScreen("ASStages");
+            if (currentStage == 3) {
+                mainApp.showScreen("Grounds");
+            } else {
+                if (currentGround.equals("AS")) {
+                    mainApp.showScreen("ASStages");
+                } else if (currentGround.equals("DM")) {
+                    mainApp.showScreen("DMStages");
+                }
+            }
         });
 
         buttonsPanel.add(continueBtn);
@@ -111,6 +121,9 @@ public class StageCompletePanel extends JPanel {
         String ground = gameState.getCurrentGround();
         int stage = gameState.getCurrentStage();
         
+        this.currentGround = ground;
+        this.currentStage = stage;
+
         stageLabel.setText("Stage: " + ground + "-" + stage);
         
         int stageScore = gameState.getCurrentStageScore();
