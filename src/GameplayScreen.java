@@ -308,16 +308,18 @@ public class GameplayScreen extends JPanel {
     
         JOptionPane.showMessageDialog(this,
             "Stage Complete!\nTotal Score: " + gameState.getTotalScore());
-        mainApp.showScreen("Initial");
 
+        LeaderboardManager lbManager = mainApp.getLeaderboardManager();
         if (lbManager.isHighScore(gameState.getTotalScore())) {
-        boolean madeIt = lbManager.addScore(gameState.getPlayerName(), gameState.getTotalScore());
-        if (madeIt) {
-            JOptionPane.showMessageDialog(this,
-                "NEW HIGH SCORE!\nYou made it to the leaderboard!\nRank #" + 
-                lbManager.getRank(gameState.getTotalScore()));
+            boolean madeIt = lbManager.addScore(gameState.getPlayerName(), gameState.getTotalScore());
+            if (madeIt) {
+                JOptionPane.showMessageDialog(this,
+                    "NEW HIGH SCORE!\nYou made it to the leaderboard!\nRank #" + 
+                    lbManager.getRank(gameState.getTotalScore()));
+            }
         }
-    }
+        
+        mainApp.showScreen("Initial");
     }
 
     private void gameOver() {
