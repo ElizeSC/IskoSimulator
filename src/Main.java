@@ -28,60 +28,64 @@ public class Main {
     private DMStageSelectionPanel dmStageSelection;
     private final Instructions howToPlayScreen;
     private final GameplayScreen gameplayScreen;
+    private LeaderboardManager leaderboardManager;
+    private LeaderboardPanel leaderboardPanel;
+
 
     public Main() {
-        frame = new JFrame("Isko Simulator");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        // Initialize Music Manager
-        musicManager = new MusicManager();
-        
-        // Add window listener to cleanup music when closing
-        frame.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                musicManager.dispose();
-            }
-        });
 
-        cardLayout = new CardLayout();
-        mainPanel = new JPanel(cardLayout);
+    // 1. Create Frame First
+    frame = new JFrame("Isko Simulator");
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        gameState = new GameState("Player");
+    // 2. Initialize CardLayout and Main Panel
+    cardLayout = new CardLayout();
+    mainPanel = new JPanel(cardLayout);
 
-        // Initialize panels
-        // --- Initialize Panels ---
-        splashScreen = new SplashScreen();
-        nameInput = new NameInput(this);
-        initialScreen = new InitialScreenPanel(this);
-        groundsScreen = new GroundsScreenPanel(this);
-        howToPlayScreen = new Instructions(this);
-        gameplayScreen = new GameplayScreen(this);
+    // 3. Initialize Managers
+    musicManager = new MusicManager();
+    leaderboardManager = new LeaderboardManager();
+    gameState = new GameState("Player");
 
-        // Initialize stage selection panels directly
-        asStageSelection = new ASStageSelectionPanel(this, gameState);
-        //dmStageSelection = new DMStageSelectionPanel(this, gameState);
+    // 4. Add window listener
+    frame.addWindowListener(new java.awt.event.WindowAdapter() {
+        @Override
+        public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+            musicManager.dispose();
+        }
+    });
 
-        // Add to CardLayout
-        // --- Add to CardLayout ---
-        mainPanel.add(splashScreen, "Splash");
-        mainPanel.add(nameInput, "NameInput");
-        mainPanel.add(initialScreen, "Initial");
-        mainPanel.add(groundsScreen, "Grounds");
-        mainPanel.add(asStageSelection, "ASStages");
-        //mainPanel.add(dmStageSelection, "DMStages");
-        mainPanel.add(howToPlayScreen, "HowToPlay");
-        mainPanel.add(gameplayScreen, "Gameplay");
+    // 5. Initialize Screens
+    splashScreen = new SplashScreen();
+    nameInput = new NameInput(this);
+    initialScreen = new InitialScreenPanel(this);
+    groundsScreen = new GroundsScreenPanel(this);
+    howToPlayScreen = new Instructions(this);
+    gameplayScreen = new GameplayScreen(this);
+    asStageSelection = new ASStageSelectionPanel(this, gameState);
+    leaderboardPanel = new LeaderboardPanel(this, leaderboardManager);
 
-        frame.setContentPane(mainPanel);
-        frame.setSize(1440, 1024);
-        frame.setResizable(false);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+    // 6. Add screens to CardLayout
+    mainPanel.add(splashScreen, "Splash");
+    mainPanel.add(nameInput, "NameInput");
+    mainPanel.add(initialScreen, "Initial");
+    mainPanel.add(groundsScreen, "Grounds");
+    mainPanel.add(asStageSelection, "ASStages");
+    mainPanel.add(howToPlayScreen, "HowToPlay");
+    mainPanel.add(gameplayScreen, "Gameplay");
+    mainPanel.add(leaderboardPanel, "Leaderboard");
 
-        // --- Start the Sequence ---
-        runStartupSequence();
-    }
+    // 7. Finalize frame
+    frame.setContentPane(mainPanel);
+    frame.setSize(1440, 1024);
+    frame.setResizable(false);
+    frame.setLocationRelativeTo(null);
+    frame.setVisible(true);
+
+    // 8. Run Startup Sequence
+    runStartupSequence();
+}
+
 
     public Main(ASStageSelectionPanel asStageSelection, CardLayout cardLayout, DMStageSelectionPanel dmStageSelection, JFrame frame, GameplayScreen gameplayScreen, GroundsScreenPanel groundsScreen, Instructions howToPlayScreen, InitialScreenPanel initialScreen, JPanel mainPanel, NameInput nameInput, SplashScreen splashScreen) {
         this.asStageSelection = asStageSelection;
@@ -96,6 +100,11 @@ public class Main {
         this.nameInput = nameInput;
         this.splashScreen = splashScreen;
         this.musicManager = new MusicManager();
+    }
+
+    public void showLeaderboard() {
+        leaderboardPanel.refresh();
+        showScreen("Leaderboard");
     }
 
     private void runStartupSequence() {
@@ -181,5 +190,9 @@ public class Main {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(Main::new);
+    }
+
+    public LeaderboardManager getLeaderboardManager() {
+        return leaderboardManager;
     }
 }
