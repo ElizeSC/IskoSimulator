@@ -1,7 +1,7 @@
 package src;
 
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 
 public class UIHelpers {
 
@@ -10,7 +10,9 @@ public class UIHelpers {
         button.setBorderPainted(false);
         button.setContentAreaFilled(false);
         button.setFocusPainted(false);
-        button.addActionListener(e -> action.run());
+        if (action != null) {
+            button.addActionListener(e -> action.run());
+        }
         return button;
     }
 
@@ -21,8 +23,9 @@ public class UIHelpers {
         button.setBorderPainted(false);
         button.setContentAreaFilled(false);
         button.setFocusPainted(false);
-        button.addActionListener(e -> action.run());
-
+        if (action != null) {
+            button.addActionListener(e -> action.run());
+        }
 
         Dimension size = new Dimension(icon.getIconWidth(), icon.getIconHeight());
         button.setPreferredSize(size);
@@ -40,12 +43,8 @@ public class UIHelpers {
         panel.setOpaque(false);
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-        JButton button = enabled ? createImageButtonPlain(image, onClick) : new JButton(image);
-        if (!enabled) {
-            button.setBorderPainted(false);
-            button.setContentAreaFilled(false);
-            button.setEnabled(false);
-        }
+        JButton button = createImageButtonPlain(image, enabled ? onClick : null);
+        button.setEnabled(enabled);
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JLabel labelComp = new JLabel(label);

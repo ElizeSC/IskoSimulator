@@ -77,7 +77,7 @@ public class GameplayScreen extends JPanel {
         powerupsPanel.setOpaque(false);
 
         ImageIcon latteIcon = new ImageIcon("assets/objects/latte.png");
-        ImageIcon macchiatoIcon = new ImageIcon("assets/objects/macchiato.png");
+        ImageIcon macchiatoIcon = new ImageIcon("assets/objects/machiatto.png");
         ImageIcon americanoIcon = new ImageIcon("assets/objects/americano.png");
 
         latteButton = createPowerupButton(latteIcon);
@@ -153,25 +153,47 @@ public class GameplayScreen extends JPanel {
         return btn;
     }
 
-    public void startStage(String ground, int stage) {
-        gameState = new GameState("Player");
+    public void startStage(String ground, int stage, GameState existingGameState) {
+        this.gameState = existingGameState; 
         gameState.setCurrentStage(ground, stage);
-        currentQuestions = questionBank.getQuestionsForStage(ground, stage);
-        currentQuestionIndex = 0;
 
-        System.out.println("Starting stage with " + currentQuestions.size() + " questions");
+        currentQuestionIndex = 0;  // must reset to 0
+        macchiatoActive = false; 
+        currentQuestions = questionBank.getQuestionsForStage(ground, stage);
+
+        System.out.println("=== STARTING STAGE ===");
+        System.out.println("Ground: " + ground + ", Stage: " + stage);
+        System.out.println("Questions loaded: " + currentQuestions.size());
+        System.out.println("Current question index RESET to: " + currentQuestionIndex);
+        System.out.println("Lives: " + gameState.getSunflowers());
+        System.out.println("Power-ups available: L=" + gameState.isLatteAvailable() 
+                        + " M=" + gameState.isMacchiatoAvailable() 
+                        + " A=" + gameState.isAmericanoAvailable());
+    
+        if (!currentQuestions.isEmpty()) {
+            System.out.println("First question: " + currentQuestions.get(0).getQuestionText().substring(0, Math.min(50, currentQuestions.get(0).getQuestionText().length())) + "...");
+        }
 
         refreshDisplay();
         loadQuestion();
     }
 
     private void loadQuestion() {
+        System.out.println("loadQuestion() called - Index: " + currentQuestionIndex + " / Total: " + currentQuestions.size());
+    
         if (currentQuestionIndex >= currentQuestions.size()) {
+            System.out.println("No more questions - completing stage");
             completeStage();
             return;
         }
 
         Question q = currentQuestions.get(currentQuestionIndex);
+    
+        String preview = q.getQuestionText();
+        if (preview.length() > 50) {
+            preview = preview.substring(0, 50) + "...";
+        }
+        System.out.println("Loading Q" + (currentQuestionIndex + 1) + ": " + preview);
 
         questionLabel.setText("<html><center>" + q.getQuestionText() + "</center></html>");
 
@@ -254,6 +276,7 @@ public class GameplayScreen extends JPanel {
 
     private void useAmericano() {
         if (!gameState.useAmericano()) return;
+        refreshDisplay();
         currentQuestionIndex++;
         loadQuestion();
     }
@@ -264,7 +287,7 @@ public class GameplayScreen extends JPanel {
             sunflowerLabels[i].setVisible(i < lives);
         }
 
-        scoreLabel.setText("Score: " + gameState.getCurrentStageScore());
+        scoreLabel.setText("Score: " + gameState.getTotalScore());
 
         latteButton.setEnabled(gameState.isLatteAvailable());
         macchiatoButton.setEnabled(gameState.isMacchiatoAvailable());
@@ -272,15 +295,25 @@ public class GameplayScreen extends JPanel {
     }
 
     private void completeStage() {
+        System.out.println("=== COMPLETING STAGE ===");
+        System.out.println("Current ground: " + gameState.getCurrentGround());
+        System.out.println("Current stage: " + gameState.getCurrentStage());
+    
         gameState.completeStage();
+    
+        System.out.println("Stage completed. Checking unlock status:");
+        System.out.println("AS-1 complete: " + gameState.isStageUnlocked("AS", 1));
+        System.out.println("AS-2 unlocked: " + gameState.isStageUnlocked("AS", 2));
+        System.out.println("AS-3 unlocked: " + gameState.isStageUnlocked("AS", 3));
+    
         JOptionPane.showMessageDialog(this,
-                "Stage Complete!\nTotal Score: " + gameState.getTotalScore());
+            "Stage Complete!\nTotal Score: " + gameState.getTotalScore());
         mainApp.showScreen("Initial");
     }
 
     private void gameOver() {
         JOptionPane.showMessageDialog(this,
-                "Game Over!\nScore: " + gameState.getCurrentStageScore());
+                "Game Over!\nTotal Score: " + gameState.getTotalScore());
         mainApp.showScreen("Initial");
     }
 

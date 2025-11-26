@@ -149,7 +149,7 @@ public class QuestionBank {
 
         String difficulty;
         if (stage == 1) difficulty = "Easy";
-        else if (stage == 2) difficulty = "Moderate";
+        else if (stage == 2) difficulty = "Average";
         else difficulty = "Difficult";
 
         for (Question q : sourceBank) {

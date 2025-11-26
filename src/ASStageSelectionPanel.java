@@ -6,7 +6,13 @@ import static src.UIHelpers.*;
 
 public class ASStageSelectionPanel extends JPanel {
 
-    public ASStageSelectionPanel(Main mainApp) {
+    private Main mainApp;
+    private GameState gameState;
+
+    public ASStageSelectionPanel(Main mainApp, GameState gameState) {
+        this.mainApp = mainApp;
+        this.gameState = gameState;
+
         setLayout(new BorderLayout());
 
         // Background
@@ -29,24 +35,54 @@ public class ASStageSelectionPanel extends JPanel {
 
         // Load images
         ImageIcon as1ImageOriginal = new ImageIcon("assets/text-and-buttons/as1-image.png");
-        // Resize to match the locked image size (adjusted the dimensions so that both images of the grounds are the same size)
         Image as1ImageScaled = as1ImageOriginal.getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH);
         ImageIcon as1Image = new ImageIcon(as1ImageScaled);
-
         ImageIcon as1Label = new ImageIcon("assets/text-and-buttons/as1-label.png");
         ImageIcon as1Desc = new ImageIcon("assets/text-and-buttons/Easy.png");
+
+        ImageIcon as2ImageOriginal = new ImageIcon("assets/text-and-buttons/as2-image.png");
+        Image as2ImageScaled = as2ImageOriginal.getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH);
+        ImageIcon as2Image = new ImageIcon(as2ImageScaled);
+        ImageIcon as2Label = new ImageIcon("assets/text-and-buttons/as2-label.png");
+        ImageIcon as2Desc = new ImageIcon("assets/text-and-buttons/average.png");
+
+        ImageIcon as3ImageOriginal = new ImageIcon("assets/text-and-buttons/as3-image.png");
+        Image as3ImageScaled = as3ImageOriginal.getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH);
+        ImageIcon as3Image = new ImageIcon(as3ImageScaled);
+        ImageIcon as3Label = new ImageIcon("assets/text-and-buttons/as3-label.png");
+        ImageIcon as3Desc = new ImageIcon("assets/text-and-buttons/difficult.png");
+
         ImageIcon lockedImage = new ImageIcon("assets/text-and-buttons/locked-img.png");
         ImageIcon lockedLabel = new ImageIcon("assets/text-and-buttons/Locked.png");
         ImageIcon lockedDesc = new ImageIcon("assets/text-and-buttons/locked-description.png");
+
+        boolean stage2Unlocked = gameState.isStageUnlocked("AS", 2);
+        boolean stage3Unlocked = gameState.isStageUnlocked("AS", 3);
+
+        System.out.println("AS Stage 2 unlocked: " + stage2Unlocked);
+        System.out.println("AS Stage 3 unlocked: " + stage3Unlocked);
 
         // Create stage panels using helper
         JPanel stage1 = createChoicePanel(as1Image, as1Label, as1Desc, true,
                 () -> mainApp.startGameplay("AS", 1));
 
-        JPanel stage2 = createChoicePanel(lockedImage, lockedLabel, lockedDesc, false, null);
-        JPanel stage3 = createChoicePanel(lockedImage, lockedLabel, lockedDesc, false, null);
+        JPanel stage2 = createChoicePanel(
+            stage2Unlocked ? as2Image : lockedImage,
+            stage2Unlocked ? as2Label : lockedLabel,
+            stage2Unlocked ? as2Desc : lockedDesc,
+            stage2Unlocked,
+            stage2Unlocked ? () -> mainApp.startGameplay("AS", 2) : null
+        );
 
-        // Combine stages with Box layout for perfect centering
+        JPanel stage3 = createChoicePanel(
+            stage3Unlocked ? as3Image : lockedImage,
+            stage3Unlocked ? as3Label : lockedLabel,
+            stage3Unlocked ? as3Desc : lockedDesc,
+            stage3Unlocked,
+            stage3Unlocked ? () -> mainApp.startGameplay("AS", 3) : null
+        );
+
+        // Combine Stages
         JPanel stagesPanel = new JPanel();
         stagesPanel.setOpaque(false);
         stagesPanel.setLayout(new BoxLayout(stagesPanel, BoxLayout.X_AXIS));

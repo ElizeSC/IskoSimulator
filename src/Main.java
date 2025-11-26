@@ -10,6 +10,10 @@ public class Main {
     
     // Game Data
     private String selectedGround;
+
+  3
+    private GameState gameState;
+
     private String playerName;
     
     // Music Manager
@@ -20,8 +24,8 @@ public class Main {
     private final NameInput nameInput;
     private final InitialScreenPanel initialScreen;
     private final GroundsScreenPanel groundsScreen;
-    private final ASStageSelectionPanel asStageSelection;
-    private final DMStageSelectionPanel dmStageSelection;
+    private ASStageSelectionPanel asStageSelection;
+    private DMStageSelectionPanel dmStageSelection;
     private final Instructions howToPlayScreen;
     private final GameplayScreen gameplayScreen;
 
@@ -43,23 +47,29 @@ public class Main {
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
 
+        gameState = new GameState("Player");
+
+        // Initialize panels
         // --- Initialize Panels ---
         splashScreen = new SplashScreen();
         nameInput = new NameInput(this);
         initialScreen = new InitialScreenPanel(this);
         groundsScreen = new GroundsScreenPanel(this);
-        asStageSelection = new ASStageSelectionPanel(this);
-        dmStageSelection = new DMStageSelectionPanel(this);
         howToPlayScreen = new Instructions(this);
         gameplayScreen = new GameplayScreen(this);
 
+        // Initialize stage selection panels directly
+        asStageSelection = new ASStageSelectionPanel(this, gameState);
+        //dmStageSelection = new DMStageSelectionPanel(this, gameState);
+
+        // Add to CardLayout
         // --- Add to CardLayout ---
         mainPanel.add(splashScreen, "Splash");
         mainPanel.add(nameInput, "NameInput");
         mainPanel.add(initialScreen, "Initial");
         mainPanel.add(groundsScreen, "Grounds");
         mainPanel.add(asStageSelection, "ASStages");
-        mainPanel.add(dmStageSelection, "DMStages");
+        //mainPanel.add(dmStageSelection, "DMStages");
         mainPanel.add(howToPlayScreen, "HowToPlay");
         mainPanel.add(gameplayScreen, "Gameplay");
 
@@ -103,7 +113,29 @@ public class Main {
         timer.start();
     }
 
+    // Refresh stage panels to show unlocked stages
+    private void updateStageSelectionPanels() {
+        // Remove old panels
+        mainPanel.remove(asStageSelection);
+        //mainPanel.remove(dmStageSelection);
+        
+        // Create new panels with updated game state
+        asStageSelection = new ASStageSelectionPanel(this, gameState);
+        //dmStageSelection = new DMStageSelectionPanel(this, gameState);
+
+        // Add new panels
+        mainPanel.add(asStageSelection, "ASStages");
+        //mainPanel.add(dmStageSelection, "DMStages");
+        
+        // Revalidate to apply changes
+        mainPanel.revalidate();
+        mainPanel.repaint();
+    }
+
     public void showScreen(String name) {
+        if (name.equals("ASStages") || name.equals("DMStages")) {
+            updateStageSelectionPanels();
+        } 
         // Handle screen-specific logic
         if (name.equals("HowToPlay")) {
             howToPlayScreen.reset();
@@ -139,8 +171,12 @@ public class Main {
     }
 
     public void startGameplay(String ground, int stage){
-        gameplayScreen.startStage(ground, stage);
+        gameplayScreen.startStage(ground, stage, gameState);
         showScreen("Gameplay");
+    }
+
+    public GameState getGameState() {
+        return gameState;
     }
 
     public static void main(String[] args) {
