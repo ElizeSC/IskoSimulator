@@ -112,7 +112,7 @@ public class Main {
         showScreen("Splash");
         
         // Start intro music (plays during Splash + Name Entry)
-        musicManager.playMusic("assets/music/intro-music.wav");
+        musicManager.playMusic("assets/music/multo.wav");
 
         // Wait 3 Seconds (3000ms), then switch to Name Input
         Timer timer = new Timer(3500, e -> {
