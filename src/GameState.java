@@ -147,18 +147,30 @@ public class GameState {
     }
 
      public boolean isStageUnlocked(String ground, int stage) {
-        if (stage == 1) return true; // Stage 1 always unlocked
-
         if (ground.equals("AS")) {
-            if (stage == 2) return as1Complete;
-            if (stage == 3) return as2Complete;
+            if (stage == 1) return true;
+            if (stage == 2) return as1Complete && !as2Complete;
+            if (stage == 3) return as2Complete && !as3Complete; 
         } else {
-            if (stage == 2) return dm1Complete;
-            if (stage == 3) return dm2Complete;
+            if (stage == 1) return true;
+            if (stage == 2) return dm1Complete && !dm2Complete;
+            if (stage == 3) return dm2Complete && !dm3Complete;
         }
         return false;
     }
 
+    public boolean isStageClickable(String ground, int stage) {
+        if (ground.equals("AS")) {
+            if (stage == 1) return !as1Complete; // Clickable only if not complete
+            if (stage == 2) return as1Complete && !as2Complete;
+            if (stage == 3) return as2Complete && !as3Complete;
+        } else {
+            if (stage == 1) return !dm1Complete;
+            if (stage == 2) return dm1Complete && !dm2Complete;
+            if (stage == 3) return dm2Complete && !dm3Complete;
+        }
+        return false;
+    }
 
     // Getters
     public String getPlayerName() { return playerName; }

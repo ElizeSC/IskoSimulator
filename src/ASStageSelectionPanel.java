@@ -56,30 +56,41 @@ public class ASStageSelectionPanel extends JPanel {
         ImageIcon lockedLabel = new ImageIcon("assets/text-and-buttons/Locked.png");
         ImageIcon lockedDesc = new ImageIcon("assets/text-and-buttons/locked-description.png");
 
+        boolean stage1Unlocked = gameState.isStageUnlocked("AS", 1);
         boolean stage2Unlocked = gameState.isStageUnlocked("AS", 2);
         boolean stage3Unlocked = gameState.isStageUnlocked("AS", 3);
 
+        boolean stage1Clickable = gameState.isStageClickable("AS", 1);
+        boolean stage2Clickable = gameState.isStageClickable("AS", 2);
+        boolean stage3Clickable = gameState.isStageClickable("AS", 3);
+
+        System.out.println("=== STAGE SELECTION SCREEN ===");
+        System.out.println("AS Stage 1 unlocked: " + stage1Unlocked); 
         System.out.println("AS Stage 2 unlocked: " + stage2Unlocked);
         System.out.println("AS Stage 3 unlocked: " + stage3Unlocked);
 
-        // Create stage panels using helper
-        JPanel stage1 = createChoicePanel(as1Image, as1Label, as1Desc, true,
-                () -> mainApp.startGameplay("AS", 1));
+        JPanel stage1 = createChoicePanel(
+            stage1Unlocked ? as1Image : lockedImage,  
+            stage1Unlocked ? as1Label : lockedLabel,   
+            stage1Unlocked ? as1Desc : lockedDesc,   
+            stage1Clickable,                        
+            stage1Clickable ? () -> mainApp.startGameplay("AS", 1) : null 
+        );
 
         JPanel stage2 = createChoicePanel(
             stage2Unlocked ? as2Image : lockedImage,
             stage2Unlocked ? as2Label : lockedLabel,
             stage2Unlocked ? as2Desc : lockedDesc,
-            stage2Unlocked,
-            stage2Unlocked ? () -> mainApp.startGameplay("AS", 2) : null
+            stage2Clickable,
+            stage2Clickable ? () -> mainApp.startGameplay("AS", 2) : null
         );
 
         JPanel stage3 = createChoicePanel(
             stage3Unlocked ? as3Image : lockedImage,
             stage3Unlocked ? as3Label : lockedLabel,
             stage3Unlocked ? as3Desc : lockedDesc,
-            stage3Unlocked,
-            stage3Unlocked ? () -> mainApp.startGameplay("AS", 3) : null
+            stage3Clickable,
+            stage3Clickable ? () -> mainApp.startGameplay("AS", 3) : null
         );
 
         // Combine Stages
