@@ -149,12 +149,12 @@ public class GameState {
      public boolean isStageUnlocked(String ground, int stage) {
         if (ground.equals("AS")) {
             if (stage == 1) return true;
-            if (stage == 2) return as1Complete && !as2Complete;
-            if (stage == 3) return as2Complete && !as3Complete; 
+            if (stage == 2) return as1Complete;
+            if (stage == 3) return as2Complete; 
         } else {
             if (stage == 1) return true;
-            if (stage == 2) return dm1Complete && !dm2Complete;
-            if (stage == 3) return dm2Complete && !dm3Complete;
+            if (stage == 2) return dm1Complete;
+            if (stage == 3) return dm2Complete;
         }
         return false;
     }

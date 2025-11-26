@@ -1,4 +1,3 @@
-// ========== GameplayScreen.java ==========
 package src;
 
 import java.awt.*;
@@ -157,44 +156,21 @@ public class GameplayScreen extends JPanel {
         this.gameState = existingGameState; 
         gameState.setCurrentStage(ground, stage);
 
-        currentQuestionIndex = 0;  // must reset to 0
+        currentQuestionIndex = 0;
         macchiatoActive = false; 
         currentQuestions = questionBank.getQuestionsForStage(ground, stage);
-
-        System.out.println("=== STARTING STAGE ===");
-        System.out.println("Ground: " + ground + ", Stage: " + stage);
-        System.out.println("Questions loaded: " + currentQuestions.size());
-        System.out.println("Current question index RESET to: " + currentQuestionIndex);
-        System.out.println("Lives: " + gameState.getSunflowers());
-        System.out.println("Power-ups available: L=" + gameState.isLatteAvailable() 
-                        + " M=" + gameState.isMacchiatoAvailable() 
-                        + " A=" + gameState.isAmericanoAvailable());
-    
-        if (!currentQuestions.isEmpty()) {
-            System.out.println("First question: " + currentQuestions.get(0).getQuestionText().substring(0, Math.min(50, currentQuestions.get(0).getQuestionText().length())) + "...");
-        }
 
         refreshDisplay();
         loadQuestion();
     }
 
     private void loadQuestion() {
-        System.out.println("loadQuestion() called - Index: " + currentQuestionIndex + " / Total: " + currentQuestions.size());
-    
         if (currentQuestionIndex >= currentQuestions.size()) {
-            System.out.println("No more questions - completing stage");
             completeStage();
             return;
         }
 
         Question q = currentQuestions.get(currentQuestionIndex);
-    
-        String preview = q.getQuestionText();
-        if (preview.length() > 50) {
-            preview = preview.substring(0, 50) + "...";
-        }
-        System.out.println("Loading Q" + (currentQuestionIndex + 1) + ": " + preview);
-
         questionLabel.setText("<html><center>" + q.getQuestionText() + "</center></html>");
 
         String[] options = q.getOptions();
@@ -296,30 +272,18 @@ public class GameplayScreen extends JPanel {
 
     private void completeStage() {
         System.out.println("=== COMPLETING STAGE ===");
-        System.out.println("Current ground: " + gameState.getCurrentGround());
-        System.out.println("Current stage: " + gameState.getCurrentStage());
     
         gameState.completeStage();
-    
-        System.out.println("Stage completed. Checking unlock status:");
-        System.out.println("AS-1 complete: " + gameState.isStageUnlocked("AS", 1));
-        System.out.println("AS-2 unlocked: " + gameState.isStageUnlocked("AS", 2));
-        System.out.println("AS-3 unlocked: " + gameState.isStageUnlocked("AS", 3));
-    
-        JOptionPane.showMessageDialog(this,
-            "Stage Complete!\nTotal Score: " + gameState.getTotalScore());
-
+        
+        // Handle leaderboard silently or with a small notification if you prefer, 
+        // but the main UI transition is now the StageCompletePanel
         LeaderboardManager lbManager = mainApp.getLeaderboardManager();
         if (lbManager.isHighScore(gameState.getTotalScore())) {
-            boolean madeIt = lbManager.addScore(gameState.getPlayerName(), gameState.getTotalScore());
-            if (madeIt) {
-                JOptionPane.showMessageDialog(this,
-                    "NEW HIGH SCORE!\nYou made it to the leaderboard!\nRank #" + 
-                    lbManager.getRank(gameState.getTotalScore()));
-            }
+            lbManager.addScore(gameState.getPlayerName(), gameState.getTotalScore());
         }
         
-        mainApp.showScreen("Initial");
+        // [Updated] Switch to the dedicated StageCompletePanel instead of a popup
+        mainApp.showStageComplete(gameState);
     }
 
     private void gameOver() {
@@ -348,7 +312,5 @@ public class GameplayScreen extends JPanel {
             g2.dispose();
             super.paintComponent(g);
         }
-
-        
     }
 }

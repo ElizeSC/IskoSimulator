@@ -74,12 +74,12 @@ public class StageCompletePanel extends JPanel {
         JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 0));
         buttonsPanel.setOpaque(false);
 
-        JButton continueBtn = createStyledButton("Continue");
+        JButton continueBtn = createStyledButton("Main Menu");
         continueBtn.addActionListener(e -> mainApp.showScreen("Initial"));
 
-        JButton nextStageBtn = createStyledButton("Next Stage");
+        JButton nextStageBtn = createStyledButton("Stage Selection");
         nextStageBtn.addActionListener(e -> {
-            // This will be set dynamically based on current stage
+            // [Updated] Go to ASStages map for next level selection
             mainApp.showScreen("ASStages");
         });
 
