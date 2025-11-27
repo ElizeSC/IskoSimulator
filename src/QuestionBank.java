@@ -64,7 +64,7 @@ public class QuestionBank {
                 String ground = parts[0].trim().toUpperCase();
                 String difficulty = parts[1].trim();
                 String category = parts[2].trim();
-                String questionText = parts[3].trim();
+                String questionText = parts[3].trim().replace("|", "\n");
                 String[] options = {
                         parts[4].trim(),
                         parts[5].trim(),
