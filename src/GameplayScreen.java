@@ -171,7 +171,7 @@ public class GameplayScreen extends JPanel {
         }
 
         Question q = currentQuestions.get(currentQuestionIndex);
-        questionLabel.setText("<html><center>" + q.getQuestionText() + "</center></html>");
+        questionLabel.setText("<html><center>" + q.getQuestionText().replace("\n", "<br>") + "</center></html>");
 
         String[] options = q.getOptions();
         String[] labels = {"A", "B", "C", "D"};
