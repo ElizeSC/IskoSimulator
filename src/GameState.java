@@ -31,7 +31,7 @@ public class GameState {
 
     // Reset state for new stage
     public void resetStageState() {
-        this.sunflowers = 3;
+        this.sunflowers = 50;
         this.currentStageScore = 0;
         this.latteAvailable = true;
         this.macchiatoAvailable = true;
