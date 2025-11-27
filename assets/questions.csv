@@ -121,8 +121,7 @@ As,Easy,"Programming, Java","What will this code output? =|int i = 1; while (i &
 As,Easy,"Programming, Java",Which keyword is used to exit from a loop immediately?,continue,break,exit,stop,B
 As,Easy,"Programming, Java","What will this code output?|int a = 3;|System.out.println(++a);",2,4,3,Error,B
 As,Easy,"Programming, Java",Which keyword is used to inherit a class in Java?,implements,derives,extends,super,C
-As,Easy,"Programming, Java","What will be the result of this code?|int x = 10; if (x == 10) System.out.println(""Match"");|else System.out.println(""No Match"");
-",No Match,Error,10,Match,D
+As,Easy,"Programming, Java","What will be the result of this code?|int x = 10; if (x == 10) System.out.println(""Match"");|else System.out.println(""No Match""); ",No Match,Error,10,Match,D
 As,Average,"Programming, Java","What is the output?|int a = 10, b = 20; if (a = b) System.out.println(""Equal"");|else System.out.println(""Not Equal"");",Equal,Not Equal,Error,Compilation error,D
 As,Average,"Programming, Java","What is the output?|public class Main { public static void main(String[] args) {|int x = 5; System.out.println(x++ + ++x);}|}",10,12,11,Undefined,C
 As,Average,"Programming, Java","What is wrong with this code?|public static void main(String[] args) {|int arr = {1, 2, 3};|System.out.println(arr[0]);",Nothing wrong,Array declaration syntax error,Index out of bounds,Missing semicolon,B
@@ -136,8 +135,7 @@ As,Difficult ,"Programming, Java","Identify the error:|class Main { public stati
 As,Difficult,"Programming, Java","What is the output? class Test { int x; Test(int x) { this.x = x; }|} public static void main(String[] args) {|Test t1 = new Test(5); Test t2 = new Test(5);|System.out.println(t1 == t2);}",True,False,Error,5,B
 As,Difficult,"Programming, Java","What will this output?|class A { A() { System.out.print(""A ""); }|} class B extends A { B() { System.out.print(""B ""); } |} public class Main { public static void main(String[] args) { new B(); }}",B A,A B ,A ,B,B
 As,Difficult,"Programming, Java","What will this program output? class X { X() { System.out.print(""X ""); }|} class Y extends X { Y() { System.out.print(""Y ""); } |} public class Main { public static void main(String[] args) { new Y(); } }",Y X,X Y,X,Y,B
-As,Difficult,"Programming, Java","What is the output? |public class Main {|public static void main(String[] args) { int x = 5;|System.out.println(x++ + ++x);}
-}",10,12,11,Undefined,C
+As,Difficult,"Programming, Java","What is the output? |public class Main {|public static void main(String[] args) { int x = 5;|System.out.println(x++ + ++x);} }",10,12,11,Undefined,C
 As,Easy ,"Programming, Python","What is the output of the following code?|print(5 + 3 * 2)",10,16,11,8,C
 As,Easy ,"Programming, Python",Which keyword is used to define a function in Python?,func,def,function,define,B
 As,Easy ,"Programming, Python","What is the output?|x = 10|x /= 2|print(x)",5,5.0,10,Error,B
@@ -174,5 +172,4 @@ As,Average,"Programming, JavaScript","Identify the issue:|let x = 10; if (x = 5)
 ",Syntax error,Assignment used instead of comparison,Missing semicolon,Wrong data type,B
 As,Difficult ,"Programming, JavaScript","What is the output?|console.log([] == 0);|console.log([] === 0);
 ",true true,false true,true false,false false,C
-As,Difficult ,"Programming, JavaScript","What will this code print?|console.log(typeof null);|console.log(typeof NaN);
-","null, number","object, object","object, number","undefined, NaN",C
+As,Difficult ,"Programming, JavaScript","What will this code print?|console.log(typeof null);|console.log(typeof NaN); ","null, number","object, object","object, number","undefined, NaN",C
