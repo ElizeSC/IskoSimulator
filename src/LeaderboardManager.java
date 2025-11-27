@@ -1,4 +1,3 @@
-// ========== LeaderboardManager.java ==========
 package src;
 
 import java.io.*;
@@ -59,7 +58,7 @@ public class LeaderboardManager {
         if (entries.size() < MAX_ENTRIES) {
             return true;
         }
-        return score > entries.get(entries.size() - 1).getScore();
+        return !entries.isEmpty() && score > entries.get(entries.size() - 1).getScore();
     }
     
     /**
@@ -92,9 +91,6 @@ public class LeaderboardManager {
             System.err.println("Error saving leaderboard: " + e.getMessage());
         }
     }
-
-
-    
     
     /**
      * Load leaderboard from file

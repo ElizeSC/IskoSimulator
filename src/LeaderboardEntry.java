@@ -32,3 +32,4 @@ public class LeaderboardEntry implements Serializable, Comparable<LeaderboardEnt
         return playerName + " - " + score + " points (" + timestamp + ")";
     }
 }
+

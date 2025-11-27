@@ -201,11 +201,10 @@ public class GameplayScreen extends JPanel {
 
         } else {
             answerButtons[selectedIndex].setBackground(Color.RED);
-
             if (macchiatoActive) {
                 macchiatoActive = false;
                 answerButtons[selectedIndex].setEnabled(false);
-                JOptionPane.showMessageDialog(this, "Second chance! Try again.");
+                //JOptionPane.showMessageDialog(this, "Second chance! Try again.");
             } else {
                 gameState.loseLife();
                 refreshDisplay();
@@ -246,7 +245,7 @@ public class GameplayScreen extends JPanel {
     private void useMacchiato() {
         if (!gameState.useMacchiato()) return;
         macchiatoActive = true;
-        JOptionPane.showMessageDialog(this, "Next wrong answer won't cost a life!");
+        //JOptionPane.showMessageDialog(this, "Next wrong answer won't cost a life!");
         refreshDisplay();
     }
 
@@ -272,32 +271,60 @@ public class GameplayScreen extends JPanel {
 
     private void completeStage() {
         System.out.println("=== COMPLETING STAGE ===");
-    
+        
         gameState.completeStage();
         
-        // Handle leaderboard silently or with a small notification if you prefer, 
-        // but the main UI transition is now the StageCompletePanel
-        LeaderboardManager lbManager = mainApp.getLeaderboardManager();
-        if (lbManager.isHighScore(gameState.getTotalScore())) {
-            lbManager.addScore(gameState.getPlayerName(), gameState.getTotalScore());
-        }
+        // Check if player finished ALL stages (AS-3 or DM-3)
+        boolean finishedGame = (gameState.getCurrentGround().equals("AS") && gameState.getCurrentStage() == 3) ||
+                               (gameState.getCurrentGround().equals("DM") && gameState.getCurrentStage() == 3);
         
-        // [Updated] Switch to the dedicated StageCompletePanel instead of a popup
-        mainApp.showStageComplete(gameState);
+        if (finishedGame) {
+            // Game complete (Win)
+            checkAndSaveHighScore(true); // Pass true to show "You Win" popup
+            mainApp.showScreen("Initial"); 
+        } else {
+            // Just completed a stage
+            mainApp.showStageComplete(gameState);
+        }
     }
 
     private void gameOver() {
-    // Handle leaderboard
-    LeaderboardManager lbManager = mainApp.getLeaderboardManager();
-    if (lbManager.isHighScore(gameState.getTotalScore())) {
-        lbManager.addScore(gameState.getPlayerName(), gameState.getTotalScore());
+        // Game Over (Loss)
+        // Check leaderboard silently unless high score
+        checkAndSaveHighScore(false); 
+        // Show your custom GameOverPanel
+        mainApp.showGameOver(gameState);
     }
-    
-    // Show Game Over screen instead of popup
-    mainApp.showGameOver(gameState);
-}
 
-      private class RoundedPanel extends JPanel {
+    /**
+     * @param isWin if true, we show a "Congratulations" popup. 
+     * if false (loss), we show NOTHING, because the GameOverPanel will handle it.
+     */
+    private void checkAndSaveHighScore(boolean isWin) {
+        int finalScore = gameState.getTotalScore();
+        String playerName = mainApp.getPlayerName();
+        
+        LeaderboardManager lbManager = mainApp.getLeaderboardManager();
+        
+        if (lbManager.isHighScore(finalScore)) {
+            // We ALWAYS show a popup for a high score because it contains the Rank # info
+            boolean madeIt = lbManager.addScore(playerName, finalScore);
+            int rank = lbManager.getRank(finalScore);
+            
+            if (madeIt && rank > 0) {
+                
+            }
+        } else {
+            // Not a high score
+            if (isWin) {
+                // If they won, we still need to tell them because we go to Initial screen
+                
+            }
+            // If they LOST, we do NOT show a popup. The GameOverPanel will display the score.
+        }
+    }
+
+    private class RoundedPanel extends JPanel {
         private int cornerRadius;
 
         public RoundedPanel(int radius) {

@@ -47,7 +47,7 @@ public class LeaderboardPanel extends JPanel {
 
         // Title
         JLabel title = new JLabel("Leaderboard", SwingConstants.CENTER);
-        title.setFont(loadFont(CANDC_RED_ALERT, 40f));
+        title.setFont(loadFont(CANDC_RED_ALERT, 36f));
         title.setForeground(Color.WHITE);
 
         // Header row (Rank | Name | Score)

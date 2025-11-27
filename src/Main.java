@@ -11,7 +11,7 @@ public class Main {
     // Game Data
     private String selectedGround;
     private GameState gameState;
-    private String playerName;
+    private String playerName = "Player";
     
     // Music Manager
     private final MusicManager musicManager;
@@ -27,13 +27,12 @@ public class Main {
     private final GameplayScreen gameplayScreen;
     private LeaderboardManager leaderboardManager;
     private LeaderboardPanel leaderboardPanel;
-    private final GameOverPanel gameOverScreen;
     
-    // [Updated] Added StageCompletePanel variable
+    // [Updated] Game Over and Stage Complete Panels
+    private final GameOverPanel gameOverScreen;
     private final StageCompletePanel stageCompleteScreen; 
 
     public Main() {
-        gameOverScreen = new GameOverPanel(this);
         // 1. Create Frame First
         frame = new JFrame("Isko Simulator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -66,8 +65,9 @@ public class Main {
         dmStageSelection = new DMStageSelectionPanel(this, gameState);
         leaderboardPanel = new LeaderboardPanel(this, leaderboardManager);
         
-        // [Updated] Initialize StageCompletePanel
+        // Initialize Custom Panels
         stageCompleteScreen = new StageCompletePanel(this); 
+        gameOverScreen = new GameOverPanel(this);
 
         // 6. Add screens to CardLayout
         mainPanel.add(splashScreen, "Splash");
@@ -79,10 +79,8 @@ public class Main {
         mainPanel.add(howToPlayScreen, "HowToPlay");
         mainPanel.add(gameplayScreen, "Gameplay");
         mainPanel.add(leaderboardPanel, "Leaderboard");
-        mainPanel.add(gameOverScreen, "GameOver");
-        
-        // [Updated] Add StageCompletePanel to the layout
         mainPanel.add(stageCompleteScreen, "StageComplete");
+        mainPanel.add(gameOverScreen, "GameOver");
 
         // 7. Finalize frame
         frame.setContentPane(mainPanel);
@@ -95,10 +93,16 @@ public class Main {
         runStartupSequence();
     }
 
-    // [Updated] Method to transition to the Stage Complete screen
     public void showStageComplete(GameState currentState) {
-        stageCompleteScreen.updateStats(currentState); // Pass data to the panel
+        stageCompleteScreen.updateStats(currentState);
         cardLayout.show(mainPanel, "StageComplete");
+    }
+
+    // [Updated] This ensures your custom panel gets the score before showing
+    public void showGameOver(GameState currentState) {
+        gameOverScreen.setMessage("You ran out of sunflowers!"); // Reset message to default loss text
+        gameOverScreen.updateScore(currentState.getTotalScore());
+        cardLayout.show(mainPanel, "GameOver");
     }
 
     public void showLeaderboard() {
@@ -180,10 +184,5 @@ public class Main {
 
     public LeaderboardManager getLeaderboardManager() {
         return leaderboardManager;
-    }
-
-    public void showGameOver(GameState currentState) {
-    gameOverScreen.updateScore(currentState.getTotalScore());
-    cardLayout.show(mainPanel, "GameOver");
     }
 }
