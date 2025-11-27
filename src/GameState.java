@@ -31,12 +31,34 @@ public class GameState {
 
     // Reset state for new stage
     public void resetStageState() {
-        this.sunflowers = 3;
+        this.sunflowers = 50;
         this.currentStageScore = 0;
         this.latteAvailable = true;
         this.macchiatoAvailable = true;
         this.americanoAvailable = true;
     }
+
+    
+public boolean isGroundComplete(String ground) {
+    if (ground.equals("AS")) {
+        return as1Complete && as2Complete && as3Complete;
+    } else if (ground.equals("DM")) {
+        return dm1Complete && dm2Complete && dm3Complete;
+    }
+    return false;
+}
+
+public boolean isASComplete() {
+    return as1Complete && as2Complete && as3Complete;
+}
+
+public boolean isDMComplete() {
+    return dm1Complete && dm2Complete && dm3Complete;
+}
+
+    public void setPlayerName(String name) {
+    this.playerName = name;
+}
 
     // Life system
     public void loseLife() {
@@ -110,27 +132,54 @@ public class GameState {
         return bonus;
     }
 
-    public void completeStage() {
-        int bonus = calculateStageBonus();
-        currentStageScore += bonus;
-        totalScore += bonus;
-        
-        System.out.println("=== STAGE COMPLETED ===");
-        System.out.println("Stage bonus: " + bonus);
-        System.out.println("Stage score: " + currentStageScore);
-        System.out.println("New total score: " + totalScore);
+    // Replace the completeStage method in GameState.java:
 
-        // Mark stage as complete
-         if (currentGround.equals("AS")) {
-            if (currentStage == 1) as1Complete = true;
-            else if (currentStage == 2) as2Complete = true;
-            else if (currentStage == 3) as3Complete = true;
-        } else {
-            if (currentStage == 1) dm1Complete = true;
-            else if (currentStage == 2) dm2Complete = true;
-            else if (currentStage == 3) dm3Complete = true;
+public void completeStage() {
+    int bonus = calculateStageBonus();
+    currentStageScore += bonus;
+    totalScore += bonus;
+    
+    System.out.println("=== STAGE COMPLETED (GameState) ===");
+    System.out.println("Stage bonus: " + bonus);
+    System.out.println("Stage score: " + currentStageScore);
+    System.out.println("New total score: " + totalScore);
+    System.out.println("Marking stage as complete: " + currentGround + "-" + currentStage);
+
+    // Mark stage as complete
+    if (currentGround.equals("AS")) {
+        if (currentStage == 1) {
+            as1Complete = true;
+            System.out.println("✓ AS-1 marked complete");
+        } else if (currentStage == 2) {
+            as2Complete = true;
+            System.out.println("✓ AS-2 marked complete");
+        } else if (currentStage == 3) {
+            as3Complete = true;
+            System.out.println("✓ AS-3 marked complete");
+        }
+    } else if (currentGround.equals("DM")) {
+        if (currentStage == 1) {
+            dm1Complete = true;
+            System.out.println("✓ DM-1 marked complete");
+        } else if (currentStage == 2) {
+            dm2Complete = true;
+            System.out.println("✓ DM-2 marked complete");
+        } else if (currentStage == 3) {
+            dm3Complete = true;
+            System.out.println("✓ DM-3 marked complete");
         }
     }
+    
+    // Print all completion statuses
+    System.out.println("--- All Stage Statuses ---");
+    System.out.println("AS-1: " + as1Complete);
+    System.out.println("AS-2: " + as2Complete);
+    System.out.println("AS-3: " + as3Complete);
+    System.out.println("DM-1: " + dm1Complete);
+    System.out.println("DM-2: " + dm2Complete);
+    System.out.println("DM-3: " + dm3Complete);
+    System.out.println("Game Complete? " + isGameComplete());
+}
 
     public int getBasePointsForStage() {
         if (currentStage == 1) return 100;
@@ -157,6 +206,22 @@ public class GameState {
             if (stage == 3) return dm2Complete;
         }
         return false;
+    }
+
+    public boolean isGameComplete() {
+    return as1Complete && as2Complete && as3Complete && 
+           dm1Complete && dm2Complete && dm3Complete;
+}
+
+    public void resetProgress() {
+        as1Complete = false;
+        as2Complete = false;
+        as3Complete = false;
+        dm1Complete = false;
+        dm2Complete = false;
+        dm3Complete = false;
+        totalScore = 0;
+        resetStageState();
     }
 
     public boolean isStageClickable(String ground, int stage) {

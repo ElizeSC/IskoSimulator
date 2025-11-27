@@ -11,6 +11,8 @@ public class StageCompletePanel extends JPanel {
     private JLabel totalScoreLabel;
     private JLabel sunflowersLabel;
     private JLabel powerupsLabel;
+    private JButton continueBtn;
+    private JButton nextStageBtn;
 
     private String currentGround;
     private int currentStage;
@@ -77,21 +79,11 @@ public class StageCompletePanel extends JPanel {
         JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 0));
         buttonsPanel.setOpaque(false);
 
-        JButton continueBtn = createStyledButton("Main Menu");
+        continueBtn = createStyledButton("Main Menu");
         continueBtn.addActionListener(e -> mainApp.showScreen("Initial"));
 
-        JButton nextStageBtn = createStyledButton("Continue");
-        nextStageBtn.addActionListener(e -> {
-            if (currentStage == 3) {
-                mainApp.showScreen("Grounds");
-            } else {
-                if (currentGround.equals("AS")) {
-                    mainApp.showScreen("ASStages");
-                } else if (currentGround.equals("DM")) {
-                    mainApp.showScreen("DMStages");
-                }
-            }
-        });
+        nextStageBtn = createStyledButton("Continue");
+        // Action will be set dynamically in updateStats()
 
         buttonsPanel.add(continueBtn);
         buttonsPanel.add(nextStageBtn);
@@ -117,32 +109,119 @@ public class StageCompletePanel extends JPanel {
         add(bg, BorderLayout.CENTER);
     }
 
-    public void updateStats(GameState gameState) {
-        String ground = gameState.getCurrentGround();
-        int stage = gameState.getCurrentStage();
-        
-        this.currentGround = ground;
-        this.currentStage = stage;
+    // Replace the updateStats method in StageCompletePanel.java:
 
-        stageLabel.setText("Stage: " + ground + "-" + stage);
+public void updateStats(GameState gameState) {
+    String ground = gameState.getCurrentGround();
+    int stage = gameState.getCurrentStage();
+    
+    this.currentGround = ground;
+    this.currentStage = stage;
+
+    stageLabel.setText("Stage: " + ground + "-" + stage);
+    
+    int stageScore = gameState.getCurrentStageScore();
+    int bonus = gameState.calculateStageBonus();
+    int sunflowers = gameState.getSunflowers();
+    
+    int powerupsSaved = 0;
+    if (gameState.isLatteAvailable()) powerupsSaved++;
+    if (gameState.isMacchiatoAvailable()) powerupsSaved++;
+    if (gameState.isAmericanoAvailable()) powerupsSaved++;
+    
+    // Calculate stage score before bonus
+    int scoreBeforeBonus = stageScore - bonus;
+    
+    scoreLabel.setText("Stage Score: " + scoreBeforeBonus);
+    bonusLabel.setText("Bonus: " + bonus);
+    sunflowersLabel.setText("Sunflowers: " + sunflowers + " × 100 = " + (sunflowers * 100));
+    powerupsLabel.setText("Power-ups Saved: " + powerupsSaved + " × 50 = " + (powerupsSaved * 50));
+    totalScoreLabel.setText("Total Score: " + gameState.getTotalScore());
+    
+    // Debug output - VERY DETAILED
+    System.out.println("=== STAGE COMPLETE SCREEN ===");
+    System.out.println("Current Ground: " + ground);
+    System.out.println("Current Stage: " + stage);
+    System.out.println("---AS Stages---");
+    System.out.println("  AS-1 Complete: " + (ground.equals("AS") && stage >= 1));
+    System.out.println("  AS-2 Complete: " + (ground.equals("AS") && stage >= 2));
+    System.out.println("  AS-3 Complete: " + (ground.equals("AS") && stage >= 3));
+    System.out.println("---DM Stages---");
+    System.out.println("  DM-1 Complete: " + (ground.equals("DM") && stage >= 1));
+    System.out.println("  DM-2 Complete: " + (ground.equals("DM") && stage >= 2));
+    System.out.println("  DM-3 Complete: " + (ground.equals("DM") && stage >= 3));
+    System.out.println("---Ground Completion---");
+    System.out.println("AS Complete: " + gameState.isGroundComplete("AS"));
+    System.out.println("DM Complete: " + gameState.isGroundComplete("DM"));
+    System.out.println("---GAME STATUS---");
+    System.out.println("Game Complete: " + gameState.isGameComplete());
+    
+    // Update button actions based on game state
+    updateContinueButton(gameState);
+    
+    // Check if game is complete - USE LONGER DELAY
+    if (gameState.isGameComplete()) {
+        System.out.println("✅✅✅ ALL 6 STAGES COMPLETE! ✅✅✅");
+        System.out.println("Showing winning screen in 3 seconds...");
         
-        int stageScore = gameState.getCurrentStageScore();
-        int bonus = gameState.calculateStageBonus();
-        int sunflowers = gameState.getSunflowers();
+        // Disable buttons to prevent double-clicking
+        nextStageBtn.setEnabled(false);
+        continueBtn.setEnabled(false);
         
-        int powerupsSaved = 0;
-        if (gameState.isLatteAvailable()) powerupsSaved++;
-        if (gameState.isMacchiatoAvailable()) powerupsSaved++;
-        if (gameState.isAmericanoAvailable()) powerupsSaved++;
+        Timer showWinningTimer = new Timer(3000, evt -> {
+            System.out.println("Transitioning to Winning Screen NOW!");
+            mainApp.showWinningScreen(gameState);
+        });
+        showWinningTimer.setRepeats(false);
+        showWinningTimer.start();
+    } else {
+        System.out.println("❌ Game not complete yet. Continue playing.");
+        // Make sure buttons are enabled
+        nextStageBtn.setEnabled(true);
+        continueBtn.setEnabled(true);
+    }
+}
+
+    private void updateContinueButton(GameState gameState) {
+        // Remove old action listeners
+        for (var listener : nextStageBtn.getActionListeners()) {
+            nextStageBtn.removeActionListener(listener);
+        }
         
-        // Calculate stage score before bonus
-        int scoreBeforeBonus = stageScore - bonus;
-        
-        scoreLabel.setText("Stage Score: " + scoreBeforeBonus);
-        bonusLabel.setText("Bonus: " + bonus);
-        sunflowersLabel.setText("Sunflowers: " + sunflowers + " × 100 = " + (sunflowers * 100));
-        powerupsLabel.setText("Power-ups Saved: " + powerupsSaved + " × 50 = " + (powerupsSaved * 50));
-        totalScoreLabel.setText("Total Score: " + gameState.getTotalScore());
+        // Set new action based on current state
+        if (currentStage == 3) {
+            // Just completed the 3rd stage of a ground
+            boolean currentGroundComplete = gameState.isGroundComplete(currentGround);
+            
+            if (currentGroundComplete) {
+                // All 3 stages of this ground are done - go to Grounds selection
+                nextStageBtn.setText("Choose Next Ground");
+                nextStageBtn.addActionListener(e -> {
+                    System.out.println("All " + currentGround + " stages complete. Going to Grounds selection.");
+                    mainApp.showScreen("Grounds");
+                });
+            } else {
+                // Shouldn't happen, but go to stage selection as fallback
+                nextStageBtn.setText("Continue");
+                nextStageBtn.addActionListener(e -> {
+                    if (currentGround.equals("AS")) {
+                        mainApp.showScreen("ASStages");
+                    } else {
+                        mainApp.showScreen("DMStages");
+                    }
+                });
+            }
+        } else {
+            // Not on stage 3 yet - continue to next stage in same ground
+            nextStageBtn.setText("Next Stage");
+            nextStageBtn.addActionListener(e -> {
+                if (currentGround.equals("AS")) {
+                    mainApp.showScreen("ASStages");
+                } else if (currentGround.equals("DM")) {
+                    mainApp.showScreen("DMStages");
+                }
+            });
+        }
     }
 
     private JButton createStyledButton(String text) {
@@ -152,7 +231,7 @@ public class StageCompletePanel extends JPanel {
         button.setBackground(new Color(70, 130, 180));
         button.setFocusPainted(false);
         button.setBorderPainted(false);
-        button.setPreferredSize(new Dimension(180, 50));
+        button.setPreferredSize(new Dimension(200, 50));
         
         // Hover effect
         button.addMouseListener(new java.awt.event.MouseAdapter() {

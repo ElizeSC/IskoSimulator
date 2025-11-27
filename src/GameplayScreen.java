@@ -269,24 +269,29 @@ public class GameplayScreen extends JPanel {
         americanoButton.setEnabled(gameState.isAmericanoAvailable());
     }
 
-    private void completeStage() {
-        System.out.println("=== COMPLETING STAGE ===");
-        
-        gameState.completeStage();
-        
-        // Check if player finished ALL stages (AS-3 or DM-3)
-        boolean finishedGame = (gameState.getCurrentGround().equals("AS") && gameState.getCurrentStage() == 3) ||
-                               (gameState.getCurrentGround().equals("DM") && gameState.getCurrentStage() == 3);
-        
-        if (finishedGame) {
-            // Game complete (Win)
-            checkAndSaveHighScore(true); // Pass true to show "You Win" popup
-            mainApp.showScreen("Initial"); 
-        } else {
-            // Just completed a stage
-            mainApp.showStageComplete(gameState);
-        }
+    // Replace the completeStage method in GameplayScreen.java:
+
+private void completeStage() {
+    System.out.println("=== COMPLETING STAGE (GameplayScreen) ===");
+    System.out.println("BEFORE completeStage() call:");
+    System.out.println("  Current: " + gameState.getCurrentGround() + "-" + gameState.getCurrentStage());
+    System.out.println("  Game Complete: " + gameState.isGameComplete());
+    
+    gameState.completeStage();
+    
+    System.out.println("AFTER completeStage() call:");
+    System.out.println("  Game Complete: " + gameState.isGameComplete());
+    
+    // Handle leaderboard silently
+    LeaderboardManager lbManager = mainApp.getLeaderboardManager();
+    if (lbManager.isHighScore(gameState.getTotalScore())) {
+        lbManager.addScore(gameState.getPlayerName(), gameState.getTotalScore());
     }
+    
+    // Switch to the dedicated StageCompletePanel
+    System.out.println("Showing Stage Complete Panel...");
+    mainApp.showStageComplete(gameState);
+}
 
     private void gameOver() {
         // Game Over (Loss)

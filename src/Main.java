@@ -27,7 +27,10 @@ public class Main {
     private final GameplayScreen gameplayScreen;
     private LeaderboardManager leaderboardManager;
     private LeaderboardPanel leaderboardPanel;
-    
+    private final WinningScreenPanel winningScreen;
+
+
+
     // [Updated] Game Over and Stage Complete Panels
     private final GameOverPanel gameOverScreen;
     private final StageCompletePanel stageCompleteScreen; 
@@ -64,7 +67,10 @@ public class Main {
         asStageSelection = new ASStageSelectionPanel(this, gameState);
         dmStageSelection = new DMStageSelectionPanel(this, gameState);
         leaderboardPanel = new LeaderboardPanel(this, leaderboardManager);
-        
+        winningScreen = new WinningScreenPanel(this);
+
+
+
         // Initialize Custom Panels
         stageCompleteScreen = new StageCompletePanel(this); 
         gameOverScreen = new GameOverPanel(this);
@@ -81,6 +87,7 @@ public class Main {
         mainPanel.add(leaderboardPanel, "Leaderboard");
         mainPanel.add(stageCompleteScreen, "StageComplete");
         mainPanel.add(gameOverScreen, "GameOver");
+        mainPanel.add(winningScreen, "Winning");
 
         // 7. Finalize frame
         frame.setContentPane(mainPanel);
@@ -92,6 +99,32 @@ public class Main {
         // 8. Run Startup Sequence
         runStartupSequence();
     }
+
+    public void showWinningScreen(GameState currentState) {
+    System.out.println("=== GAME COMPLETE ===");
+    System.out.println("All 6 stages completed!");
+    System.out.println("Final score: " + currentState.getTotalScore());
+    
+    LeaderboardManager lbManager = getLeaderboardManager();
+    boolean isHighScore = lbManager.isHighScore(currentState.getTotalScore());
+    
+    if (isHighScore) {
+        lbManager.addScore(currentState.getPlayerName(), currentState.getTotalScore());
+        System.out.println("New high score added to leaderboard!");
+    }
+    
+    winningScreen.updateScore(currentState.getTotalScore(), isHighScore);
+    cardLayout.show(mainPanel, "Winning");
+}
+
+
+public void resetGame() {
+    String currentPlayerName = gameState.getPlayerName();
+    gameState.resetProgress();
+    gameState.setPlayerName(currentPlayerName); // Restore player name
+    System.out.println("Game reset. Player: " + currentPlayerName);
+}
+
 
     public void showStageComplete(GameState currentState) {
         stageCompleteScreen.updateStats(currentState);
@@ -153,10 +186,10 @@ public class Main {
     }
 
     public void setPlayerName(String name) {
-        this.playerName = name;
-        System.out.println("Player Name Saved: " + this.playerName);
-    }
-
+    this.playerName = name;
+    this.gameState.setPlayerName(name); // Update GameState too
+    System.out.println("Player Name Saved: " + this.playerName);
+}
     public String getPlayerName() {
         return playerName;
     }
